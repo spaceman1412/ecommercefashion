@@ -3,11 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/circle_black_shoppingbag.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/circle_border_category.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_circle.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_outline_search_24.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_outline_shopping_bag_24.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/test.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
