@@ -33,7 +33,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="@dimen/dm_marginTop"
                 android:src="@drawable/ic_outline_search_24" />
 
             <ImageView
