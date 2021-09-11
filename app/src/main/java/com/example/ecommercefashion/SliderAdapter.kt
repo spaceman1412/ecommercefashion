@@ -3,16 +3,17 @@ package com.example.ecommercefashion
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class SliderAdapter(val images: List<Int>) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val view : View
+        val imgView : ImageView
 
         init {
-            view = itemView.findViewById(R.id.view)
+            imgView = itemView.findViewById(R.id.imageView)
         }
     }
 
@@ -22,7 +23,7 @@ class SliderAdapter(val images: List<Int>) : RecyclerView.Adapter<SliderAdapter.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.view.setBackgroundColor(images[position])
+        holder.imgView.setImageResource(images[position])
     }
 
     override fun getItemCount(): Int {

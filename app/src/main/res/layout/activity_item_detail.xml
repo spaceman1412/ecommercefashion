@@ -1,19 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
+
+
     <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_anchor="@id/sheet"
+        app:layout_anchorGravity="center_horizontal"
+        android:paddingBottom="50dp"
+        >
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/dots_container"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+
+            tools:background="@color/black" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/sheet"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_centerInParent="true"
-        android:id="@+id/viewpager2"/>
-    <me.relex.circleindicator.CircleIndicator3
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/viewpager2"
-        android:layout_marginTop="12dp"
-        android:background="@color/black"
-        android:id="@+id/dots_container"/>
+        android:background="@drawable/rounded_bottomsheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-</RelativeLayout>
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:src="@drawable/ic_indicator_selected" />
+    </FrameLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
