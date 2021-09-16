@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "875787058687",
+    "project_id": "ecommercefashion-f5cb7",
+    "storage_bucket": "ecommercefashion-f5cb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875787058687:android:e56ae225d21cf15bd67bca",
+        "android_client_info": {
+          "package_name": "com.example.ecommercefashion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875787058687-0mdpvg8u77s06pd81p4jsq1nlknt2co5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsXgGRBfYfqBKirUYcRHrnlqmTSJq7_NE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875787058687-0mdpvg8u77s06pd81p4jsq1nlknt2co5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
