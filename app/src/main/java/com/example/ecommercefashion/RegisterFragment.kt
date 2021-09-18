@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.Navigation
+import com.example.ecommercefashion.databinding.ActivityMainBinding
+import com.example.ecommercefashion.databinding.FragmentRegisterBinding
 import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
@@ -22,18 +24,21 @@ class RegisterFragment : Fragment() {
         val TAG = "Register"
     }
 
+    private lateinit var binding: FragmentRegisterBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_register, container, false)
+//        val view =  inflater.inflate(R.layout.fragment_register, container, false)
 
-        val email = view.findViewById<EditText>(R.id.email_editText_register)
-        val passwd = view.findViewById<EditText>(R.id.passwd_editText_register)
+        binding = FragmentRegisterBinding.inflate(inflater,container,false)
 
-        val register_btn = view.findViewById<Button>(R.id.signup_button_register)
+        val email = binding.emailEditTextRegister
+        val passwd = binding.passwdEditTextRegister
+
+        val register_btn = binding.signupButtonRegister
 
 
 
@@ -51,14 +56,13 @@ class RegisterFragment : Fragment() {
                 }
         }
 
-        val back_txt  : TextView = view.findViewById(R.id.back_login_text_register)
+        val back_txt  : TextView = binding.backLoginTextRegister
         back_txt.setOnClickListener {
 //            val action = RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
-            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
+            Navigation.findNavController(binding.root).navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
-        return view
+        return binding.root
     }
-
 
 }
