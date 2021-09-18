@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/name_editText_register"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -34,41 +34,41 @@
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <EditText
-        android:id="@+id/editTextTextEmailAddress2"
+        android:id="@+id/email_editText_register"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_marginTop="@dimen/dm_marginTop"
         android:inputType="textEmailAddress"
         android:hint="Email"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintEnd_toEndOf="@+id/name_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/name_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/name_editText_register" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/passwd_editText_register"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:layout_marginTop="@dimen/dm_marginTop"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextEmailAddress2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextEmailAddress2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress2" />
+        app:layout_constraintEnd_toEndOf="@+id/email_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/email_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/email_editText_register" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/signup_button_register"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:layout_marginTop="@dimen/dm_marginTop"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
-        app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+        app:layout_constraintEnd_toEndOf="@+id/passwd_editText_register"
+        app:layout_constraintStart_toStartOf="@+id/passwd_editText_register"
+        app:layout_constraintTop_toBottomOf="@+id/passwd_editText_register" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/back_login_text_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back to login screen"
@@ -76,5 +76,5 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_button_register" />
 </androidx.constraintlayout.widget.ConstraintLayout>
