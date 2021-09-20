@@ -14,6 +14,7 @@ import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.FragmentRegisterBinding
 import com.firebase.ui.auth.data.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 
@@ -43,17 +44,7 @@ class RegisterFragment : Fragment() {
 
 
         register_btn.setOnClickListener {
-            Log.d(TAG,email.text.toString())
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),passwd.text.toString())
-                .addOnCompleteListener {
-                    if(!it.isSuccessful) return@addOnCompleteListener
-                    Log.d(TAG,"Register complete ${it.result?.user?.uid}")
-                    val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                    Log.d(TAG,"Current user:  ${currentUser.toString()}")
-                }
-                .addOnFailureListener {
-                    Log.d(TAG,"Failed to create ${it.message}")
-                }
+           performRegister()
         }
 
         val back_txt  : TextView = binding.backLoginTextRegister
@@ -64,5 +55,36 @@ class RegisterFragment : Fragment() {
 
         return binding.root
     }
+    private fun performRegister(){
+        val email = binding.emailEditTextRegister
+        val passwd = binding.passwdEditTextRegister
+        Log.d(TAG,email.text.toString())
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.text.toString(),passwd.text.toString())
+            .addOnCompleteListener {
+                if(!it.isSuccessful) return@addOnCompleteListener
+                Log.d(TAG,"Register complete ${it.result?.user?.uid}")
+                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                Log.d(TAG,"Current user:  ${currentUser.toString()}")
+                saveUserToDatabase()
+            }
+            .addOnFailureListener {
+                Log.d(TAG,"Failed to create ${it.message}")
+            }
+    }
 
+    private fun saveUserToDatabase(){
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+        val uid = FirebaseAuth.getInstance().uid
+        val email = binding.emailEditTextRegister
+        val passwd = binding.passwdEditTextRegister
+        val user = User(uid.toString(),email.toString(),passwd.toString())
+        ref.setValue(user)
+            .addOnCompleteListener {
+                Log.d(TAG,"Saved user to database")
+            }
+            .addOnFailureListener {
+                Log.d(TAG,it.message.toString())
+            }
+    }
+    class User ( val uid: String ,val username : String, password: String )
 }
