@@ -1,5 +1,6 @@
 package com.example.ecommercefashion
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -48,6 +49,8 @@ class LoginFragment : Fragment() {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                 Log.d(TAG,"Login successfully ${currentUser.toString()}")
+                val intent = Intent(activity,MainActivity::class.java)
+                startActivity(intent)
             }
                 .addOnFailureListener {
                     Log.d(TAG,it.message.toString())
