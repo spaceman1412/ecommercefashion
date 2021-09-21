@@ -45,7 +45,8 @@ class LoginFragment : Fragment() {
         login_btn.setOnClickListener {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(
                 email.text.toString(),passwd.text.toString()
-            ).addOnCompleteListener {
+            )
+                .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                 Log.d(TAG,"Login successfully ${currentUser.toString()}")
@@ -58,6 +59,4 @@ class LoginFragment : Fragment() {
         }
         return binding.root
     }
-
-
 }

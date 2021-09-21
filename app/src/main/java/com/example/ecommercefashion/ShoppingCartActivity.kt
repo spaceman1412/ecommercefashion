@@ -2,12 +2,12 @@ package com.example.ecommercefashion
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.firebase.auth.FirebaseAuth
 
-class LoginSreen : AppCompatActivity() {
+class ShoppingCartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_sreen)
-        
+        setContentView(R.layout.activity_shopping_cart)
+
+
     }
 }

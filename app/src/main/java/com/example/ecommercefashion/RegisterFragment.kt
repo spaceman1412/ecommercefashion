@@ -42,8 +42,6 @@ class RegisterFragment : Fragment() {
 
         val register_btn = binding.signupButtonRegister
 
-
-
         register_btn.setOnClickListener {
            performRegister()
         }
@@ -80,8 +78,7 @@ class RegisterFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         val email = binding.emailEditTextRegister
-        val passwd = binding.passwdEditTextRegister
-        val user = User(uid.toString(),email.text.toString(),passwd.text.toString())
+        val user = User(uid.toString(),email.text.toString())
         ref.setValue(user)
             .addOnCompleteListener {
                 Log.d(TAG,"Saved user to database")
