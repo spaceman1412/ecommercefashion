@@ -3,4 +3,5 @@
     <dimen name="text_catogery_size">18sp</dimen>
     <dimen name="text_seeall">14sp</dimen>
     <dimen name="dm_marginTop">30dp</dimen>
+    <dimen name="size_count_shopping_cart">18sp</dimen>
 </resources>
