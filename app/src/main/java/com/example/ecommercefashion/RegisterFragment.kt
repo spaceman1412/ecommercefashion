@@ -52,6 +52,8 @@ class RegisterFragment : Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
+
+
         return binding.root
     }
     private fun performRegister(){
@@ -65,6 +67,7 @@ class RegisterFragment : Fragment() {
                 val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                 Log.d(TAG,"Current user:  ${currentUser.toString()}")
                 saveUserToDatabase()
+                saveShoppingCart()
 
                 val intent = Intent(activity,MainActivity::class.java)
                 startActivity(intent)
@@ -82,6 +85,19 @@ class RegisterFragment : Fragment() {
         ref.setValue(user)
             .addOnCompleteListener {
                 Log.d(TAG,"Saved user to database")
+            }
+            .addOnFailureListener {
+                Log.d(TAG,it.message.toString())
+            }
+    }
+
+    private fun saveShoppingCart(){
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
+        val text : String = "Hello world"
+        ref.setValue(text)
+            .addOnCompleteListener {
+                Log.d(TAG,"Added to database")
             }
             .addOnFailureListener {
                 Log.d(TAG,it.message.toString())

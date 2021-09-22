@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
 
         val click : LinearLayout = findViewById(R.id.linear_click)
         click.setOnClickListener{
-            val intent = Intent(this,ItemDetail::class.java)
+            val intent = Intent(this,ShoppingCartActivity::class.java)
             startActivity(intent)
         }
     }
