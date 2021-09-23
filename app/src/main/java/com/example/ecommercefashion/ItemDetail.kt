@@ -38,6 +38,12 @@ class ItemDetail : AppCompatActivity() {
         val circleIndicator : CircleIndicator3 = binding.dotsContainer
         circleIndicator.setViewPager(pager2)
 
+        val add_to_cart : LinearLayout = binding.addToCartBtnItemDetail
+        add_to_cart.setOnClickListener {
+
+        }
+
+
         val sheet : FrameLayout = binding.sheet
 
         BottomSheetBehavior.from(sheet).apply {
