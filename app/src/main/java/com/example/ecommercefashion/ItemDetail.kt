@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecommercefashion.databinding.ActivityItemDetailBinding
 import com.example.ecommercefashion.databinding.ItemDetailBinding
+import com.example.ecommercefashion.models.ItemCart
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import me.relex.circleindicator.CircleIndicator
 import me.relex.circleindicator.CircleIndicator3
@@ -19,22 +20,21 @@ import org.w3c.dom.Text
 class ItemDetail : AppCompatActivity() {
     private lateinit var binding: ActivityItemDetailBinding
 
+    var shopItem : ItemCart? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityItemDetailBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
+        shopItem = intent.getParcelableExtra(MainActivity.USER_KEY)
 
         val pager2: ViewPager2 = binding.viewpager2
 
-        val images = listOf(
-            R.drawable.pants_list,
-            R.drawable.hiphop_list,
-            R.drawable.whiteshirt_listt
-        )
+        val images = shopItem?.bannerImage
 
-        pager2.adapter = SliderAdapter(images)
+        pager2.adapter = SliderAdapter(images!!)
         val circleIndicator : CircleIndicator3 = binding.dotsContainer
         circleIndicator.setViewPager(pager2)
 
@@ -42,6 +42,9 @@ class ItemDetail : AppCompatActivity() {
         add_to_cart.setOnClickListener {
 
         }
+
+        binding.titleNameTextViewItemDetail.text = shopItem?.name
+        binding.priceTextViewItemDetail.text = "$${shopItem?.price}"
 
 
         val sheet : FrameLayout = binding.sheet

@@ -6,19 +6,22 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ItemLargeMainactivityBinding
+import com.example.ecommercefashion.databinding.ItemSmallMainActivityBinding
 import com.example.ecommercefashion.models.ItemCart
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
-import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.viewbinding.BindableItem
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    companion object{
+        val USER_KEY = "USER_KEY"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -35,11 +38,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-//        val click : LinearLayout = binding.linearClick
-//        click.setOnClickListener{
-//            val intent = Intent(this,ItemDetail::class.java)
-//            startActivity(intent)
-//        }
 
         val icon : ImageView = binding.searchIconMainActivity
         icon.setOnClickListener {
@@ -56,12 +54,29 @@ class MainActivity : AppCompatActivity() {
             ItemCart(2,"White Shirt",58,"man",R.drawable.whitetee,listOf(R.drawable.whiteshirt_listt,R.drawable.hiphop_list)),
         )
 
-        val adapter = GroupAdapter<GroupieViewHolder>()
-        recyclerView_large.adapter = adapter
-        adapter.add(ItemLarge(item_detail_list[0]))
-        adapter.add(ItemLarge(item_detail_list[1]))
+        val adapter_large = GroupAdapter<GroupieViewHolder>()
+        recyclerView_large.adapter = adapter_large
+        adapter_large.add(ItemLarge(item_detail_list[0]))
+        adapter_large.add(ItemLarge(item_detail_list[1]))
+        adapter_large.setOnItemClickListener { item, view ->
+            val intent = Intent(this,ItemDetail::class.java)
+            val shopItem = item as ItemLarge
+            intent.putExtra(USER_KEY,shopItem.item_detail)
+            startActivity(intent)
+        }
 
+        val adapter_small = GroupAdapter<GroupieViewHolder>()
+        binding.smallRecyclerViewMainActivity.adapter = adapter_small
 
+        adapter_small.add(ItemSmall(item_detail_list[0]))
+        adapter_small.add(ItemSmall(item_detail_list[1]))
+
+        adapter_small.setOnItemClickListener { item, view ->
+            val intent = Intent(this,ItemDetail::class.java)
+            val shopItem = item as ItemSmall
+            intent.putExtra(USER_KEY,shopItem.item_detail)
+            startActivity(intent)
+        }
 
     }
 
@@ -81,4 +96,21 @@ class MainActivity : AppCompatActivity() {
             return ItemLargeMainactivityBinding.bind(view)
         }
     }
+
+    class ItemSmall(val item_detail: ItemCart) : BindableItem<ItemSmallMainActivityBinding>(){
+        override fun bind(viewBinding: ItemSmallMainActivityBinding, position: Int) {
+            viewBinding.priceTextViewSmallItem.text = "$${item_detail.price}"
+            viewBinding.titleNameTextViewSmallItem.text = item_detail.name
+            viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
+        }
+
+        override fun getLayout(): Int {
+            return R.layout.item_small_main_activity
+        }
+
+        override fun initializeViewBinding(view: View): ItemSmallMainActivityBinding {
+            return ItemSmallMainActivityBinding.bind(view)
+        }
+    }
+
 }
