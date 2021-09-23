@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         val click : LinearLayout = binding.linearClick
         click.setOnClickListener{
-            val intent = Intent(this,ShoppingCartActivity::class.java)
+            val intent = Intent(this,ItemDetail::class.java)
             startActivity(intent)
         }
 
