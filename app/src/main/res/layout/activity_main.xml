@@ -79,7 +79,7 @@
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50sp"
             android:layout_marginTop="@dimen/dm_marginTop"
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
                     app:cardBackgroundColor="#eef7ff"
+                    android:padding="15sp"
                     app:cardCornerRadius="18dp">
 
                     <RelativeLayout
@@ -236,7 +237,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_large_main_activity"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="220dp"
             android:layout_marginTop="@dimen/dm_marginTop"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:scrollbars="none"
@@ -275,7 +276,7 @@
             android:id="@+id/small_recyclerView_mainActivity"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="100dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_marginTop="@dimen/dm_marginTop"
             android:scrollbars="none"
