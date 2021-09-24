@@ -12,6 +12,7 @@ import com.example.ecommercefashion.databinding.ItemLargeMainactivityBinding
 import com.example.ecommercefashion.databinding.ItemSmallMainActivityBinding
 import com.example.ecommercefashion.models.ItemCart
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.viewbinding.BindableItem
@@ -55,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         val recyclerView_large : RecyclerView = binding.recyclerViewLargeMainActivity
 
         val item_detail_list = listOf<ItemCart>(
-            ItemCart(1,"Cotton Pant",58,"man",R.drawable.pants,listOf(R.drawable.pants_list,R.drawable.hiphop_list)),
-            ItemCart(2,"White Shirt",58,"man",R.drawable.whitetee,listOf(R.drawable.whiteshirt_listt,R.drawable.hiphop_list)),
+            ItemCart("1","Cotton Pant",58,"man",R.drawable.pants,listOf(R.drawable.pants_list,R.drawable.hiphop_list)),
+            ItemCart("2","White Shirt",58,"man",R.drawable.whitetee,listOf(R.drawable.whiteshirt_listt,R.drawable.hiphop_list)),
         )
 
 

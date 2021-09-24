@@ -44,6 +44,7 @@ class ItemDetail : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         add_to_cart.setOnClickListener {
             val ref = FirebaseDatabase.getInstance().getReference("cart/$uid").push()
+            shopItem?.id = ref.key
             ref.setValue(shopItem)
                 .addOnCompleteListener {
                     Log.d("ItemDetail","Saved value to database ${ref.key}")
