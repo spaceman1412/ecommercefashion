@@ -24,7 +24,7 @@ import com.xwray.groupie.viewbinding.BindableItem
 class ShoppingCartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShoppingCartBinding
-
+    private var price : Int = 0
     companion object {
         val TAG = "ShoppingCart"
     }
@@ -39,20 +39,22 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         binding.recyclerViewShoppingCart.adapter = adapter
         val uid = FirebaseAuth.getInstance().uid
-        Log.d(TAG,"The uid $uid")
+        Log.d(TAG, "The uid $uid")
 //        adapter.add(ShopItem("AAAA"))
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-                       val shopItem = it.getValue(ItemCart::class.java)
+                    val shopItem = it.getValue(ItemCart::class.java)
 
-                       if (shopItem != null) {
-                           adapter.add(ShopItem(shopItem))
-                           Log.d(TAG, "Value is null")
-                           Log.d(TAG, "Added to adapter ${shopItem.id}")
-                       }
+                    if (shopItem != null) {
+                        adapter.add(ShopItem(shopItem))
+                        price += shopItem.price
+                        Log.d(TAG, "Value is null")
+                        Log.d(TAG, "Added to adapter ${shopItem.id}")
+                    }
                 }
+                binding.priceTextViewActivityShoppingCart.text = "$$price"
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -60,12 +62,15 @@ class ShoppingCartActivity : AppCompatActivity() {
             }
         })
 
+
+
     }
 }
 
 class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>() {
     override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
         viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
+        viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
     }
 
     override fun getLayout(): Int {
