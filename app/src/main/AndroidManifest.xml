@@ -10,14 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceFashion">
         <activity
+            android:name=".SeachActivity"
+            android:exported="true" />
+        <activity
             android:name=".CheckOutActivity"
             android:exported="true" />
         <activity
             android:name=".ShoppingCartActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".LoginSreen"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".ItemDetail"
             android:exported="true" />

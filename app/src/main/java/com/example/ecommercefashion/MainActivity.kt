@@ -88,6 +88,10 @@ class MainActivity : AppCompatActivity() {
                 filterAdapterLarge()
             }
         }
+        binding.searchIconMainActivity.setOnClickListener {
+            val intent = Intent(this,SeachActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -112,6 +116,9 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(USER_KEY, shopItem.item_detail)
             startActivity(intent)
         }
+
+
+
     }
 
     private fun filterAdapterLarge() {
@@ -160,14 +167,6 @@ class MainActivity : AppCompatActivity() {
             if(count == titles.size) adapter_large.add(ItemLarge(it))
         }
 
-
-        val text = if (titles.isNotEmpty()) {
-            titles.joinToString(", ")
-        } else {
-            "No Choice"
-        }
-
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 }
 
