@@ -56,8 +56,10 @@ class MainActivity : AppCompatActivity() {
         val recyclerView_large : RecyclerView = binding.recyclerViewLargeMainActivity
 
         val item_detail_list = listOf<ItemCart>(
-            ItemCart("1","Cotton Pant",58,"man",R.drawable.pants,listOf(R.drawable.pants_list,R.drawable.hiphop_list)),
-            ItemCart("2","White Shirt",58,"man",R.drawable.whitetee,listOf(R.drawable.whiteshirt_listt,R.drawable.hiphop_list)),
+            ItemCart("1","Cotton Pant",58,"man",R.drawable.pants,listOf(R.drawable.pants_list,R.drawable.hiphop_list),
+                listOf("Trouser","Winter")),
+            ItemCart("2","White Shirt",58,"man",R.drawable.whitetee,listOf(R.drawable.whiteshirt_listt,R.drawable.hiphop_list),
+                listOf("Shirt")),
         )
 
 
@@ -65,6 +67,17 @@ class MainActivity : AppCompatActivity() {
 
         val adapter_large = GroupAdapter<GroupieViewHolder>()
         recyclerView_large.adapter = adapter_large
+        //TODO: Create filter with category list by first check the state if anycategory
+        // is checked or not if not return default if checked we add each category by add adapter
+
+
+        binding.winterRelativeLayoutMainActivity.setOnClickListener {
+            if(it.isSelected) {it.setBackgroundColor(0x808080)
+                Log.d("MainActivity","Selected")
+            }
+        }
+
+
         adapter_large.add(ItemLarge(item_detail_list[0]))
         adapter_large.add(ItemLarge(item_detail_list[1]))
         adapter_large.setOnItemClickListener { item, view ->
@@ -86,7 +99,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(USER_KEY,shopItem.item_detail)
             startActivity(intent)
         }
-
     }
 
     class ItemLarge(val item_detail: ItemCart) : BindableItem<ItemLargeMainactivityBinding>(){
