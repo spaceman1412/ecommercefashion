@@ -71,11 +71,11 @@ class MainActivity : AppCompatActivity() {
         // is checked or not if not return default if checked we add each category by add adapter
 
 
-        binding.winterRelativeLayoutMainActivity.setOnClickListener {
-            if(it.isSelected) {it.setBackgroundColor(0x808080)
-                Log.d("MainActivity","Selected")
-            }
-        }
+//        binding.winterRelativeLayoutMainActivity.setOnClickListener {
+//            if(it.isSelected) {it.setBackgroundColor(0x808080)
+//                Log.d("MainActivity","Selected")
+//            }
+//        }
 
 
         adapter_large.add(ItemLarge(item_detail_list[0]))
