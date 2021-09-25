@@ -26,6 +26,7 @@ class ItemDetail : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
         binding = ActivityItemDetailBinding.inflate(layoutInflater)
 
         setContentView(binding.root)

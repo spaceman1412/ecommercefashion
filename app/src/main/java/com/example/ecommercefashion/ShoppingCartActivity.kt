@@ -33,6 +33,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityShoppingCartBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val adapter = GroupAdapter<GroupieViewHolder>()
 
