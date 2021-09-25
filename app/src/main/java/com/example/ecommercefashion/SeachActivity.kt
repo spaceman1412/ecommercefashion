@@ -37,7 +37,7 @@ class SeachActivity : AppCompatActivity() {
             listOf("Shirt")
         ),
     )
-    val adapter = SearchAdapter(item_detail_list)
+    val adapter = SearchAdapter(item_detail_list,this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

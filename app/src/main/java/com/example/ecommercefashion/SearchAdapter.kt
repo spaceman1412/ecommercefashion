@@ -1,19 +1,24 @@
 package com.example.ecommercefashion
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommercefashion.models.ItemCart
 
 class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
-                    ) :
+                    val context: Context) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterable {
-    private val item_detail_list_all = mutableListOf<ItemCart>(
+    private val item_detail_list_all = mutableListOf(
         ItemCart(
             "1",
             "Cotton Pant",
@@ -37,6 +42,8 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title : TextView = view.findViewById(R.id.name_textView_searchItem)
+        val image : ImageView = view.findViewById(R.id.primaryImage_imageView_searchItem)
+        val layout : ConstraintLayout = view.findViewById(R.id.layout_itemSearch)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -46,6 +53,12 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = item_detail_list[position].name
+        holder.image.setImageResource(item_detail_list[position].primaryImage)
+        holder.layout.setOnClickListener {
+            val intent = Intent(context,ItemDetail::class.java)
+            intent.putExtra(MainActivity.USER_KEY,item_detail_list[position])
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
