@@ -5,7 +5,8 @@
     android:id="@+id/layout_itemSearch"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginStart="16dp"
     >
 
     <ImageView
@@ -46,4 +47,13 @@
             android:textSize="17sp"
             />
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/primaryImage_imageView_searchItem"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/grey"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
