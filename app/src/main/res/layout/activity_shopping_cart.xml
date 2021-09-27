@@ -39,11 +39,11 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:textSize="@dimen/size_count_shopping_cart"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/checkOut_button_shoppingCart"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/checkOut_button_shoppingCart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Proceed to Checkout"
@@ -80,7 +80,7 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:textSize="@dimen/size_count_shopping_cart"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintBottom_toTopOf="@+id/checkOut_button_shoppingCart"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView

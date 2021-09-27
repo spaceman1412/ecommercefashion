@@ -1,5 +1,6 @@
 package com.example.ecommercefashion
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.renderscript.Sampler
@@ -63,7 +64,10 @@ class ShoppingCartActivity : AppCompatActivity() {
             }
         })
 
-
+        binding.checkOutButtonShoppingCart.setOnClickListener {
+            val intent = Intent(this,CheckOutActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
