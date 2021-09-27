@@ -45,6 +45,7 @@ class CheckOutActivity : AppCompatActivity() {
 
                     if (shopItem != null) {
                         adapter.add(CheckOutItem(shopItem))
+                        saveToDatabase(shopItem)
 //                        price += shopItem.price
                         Log.d("CheckOutActivity", "Added to adapter ${shopItem.id}")
                     }
@@ -56,6 +57,18 @@ class CheckOutActivity : AppCompatActivity() {
                 Log.d(ShoppingCartActivity.TAG, "Failed to adapter")
             }
         })
+    }
+
+    private fun saveToDatabase(item: ItemCart){
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
+        ref.setValue(item)
+            .addOnCompleteListener {
+                Log.d("CheckOutActivity","Complete save to database ${ref.key}")
+            }
+            .addOnFailureListener {
+                Log.d("CheckOutActivity",it.message.toString())
+            }
     }
 }
 
