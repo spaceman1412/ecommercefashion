@@ -11,10 +11,7 @@ import com.example.ecommercefashion.databinding.ActivityShoppingCartBinding
 import com.example.ecommercefashion.databinding.ItemShoppingCartBinding
 import com.example.ecommercefashion.models.ItemCart
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieAdapter
@@ -49,8 +46,11 @@ class ShoppingCartActivity : AppCompatActivity() {
                 snapshot.children.forEach {
                     val shopItem = it.getValue(ItemCart::class.java)
 
+                    //TODO: Create function to save item in current shopping cart to checkout database
+
                     if (shopItem != null) {
                         adapter.add(ShopItem(shopItem))
+
                         price += shopItem.price
                         Log.d(TAG, "Value is null")
                         Log.d(TAG, "Added to adapter ${shopItem.id}")
@@ -68,8 +68,8 @@ class ShoppingCartActivity : AppCompatActivity() {
             val intent = Intent(this,CheckOutActivity::class.java)
             startActivity(intent)
         }
-
     }
+
 }
 
 class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>() {

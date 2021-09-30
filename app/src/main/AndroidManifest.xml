@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceFashion">
         <activity
+            android:name=".CheckOutLarge"
+            android:exported="true" />
+        <activity
             android:name=".SeachActivity"
             android:exported="true" />
         <activity
