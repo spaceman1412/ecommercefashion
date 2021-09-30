@@ -32,10 +32,12 @@ class CheckOutActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                val refGetKey = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
+                val key = refGetKey.key
                 snapshot.children.forEach {
                     val shopItem = it.getValue(ItemCart::class.java)
                     if (shopItem != null) {
-                        val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
+                        val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid/$key").push()
                         ref.setValue(shopItem)
                             .addOnCompleteListener {
                                 Log.d("CheckOutActivity","Complete save to database ${ref.key}")
