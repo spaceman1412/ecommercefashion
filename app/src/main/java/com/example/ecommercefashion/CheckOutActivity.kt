@@ -37,15 +37,7 @@ class CheckOutActivity : AppCompatActivity() {
                 snapshot.children.forEach {
                     val shopItem = it.getValue(ItemCart::class.java)
                     if (shopItem != null) {
-                        val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid/$key").push()
-                        ref.setValue(shopItem)
-                            .addOnCompleteListener {
-                                Log.d("CheckOutActivity","Complete save to database ${ref.key}")
-                            }
-                            .addOnFailureListener {
-                                Log.d("CheckOutActivity",it.message.toString())
-                            }
-                        Log.d("CheckOutActivity", "Added to adapter ${shopItem.id}")
+                        saveToDatabase(shopItem,key)
                     }
                 }
             }
@@ -55,7 +47,9 @@ class CheckOutActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveToDatabase(item: ItemCart,ref:DatabaseReference){
+    private fun saveToDatabase(item: ItemCart,key: String?){
+        val uid = FirebaseAuth.getInstance().uid
+        val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid/$key").push()
         ref.setValue(item)
             .addOnCompleteListener {
                 Log.d("CheckOutActivity","Complete save to database ${ref.key}")
@@ -63,6 +57,7 @@ class CheckOutActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d("CheckOutActivity",it.message.toString())
             }
+        Log.d("CheckOutActivity", "Added to adapter ${item.id}")
     }
 }
 
