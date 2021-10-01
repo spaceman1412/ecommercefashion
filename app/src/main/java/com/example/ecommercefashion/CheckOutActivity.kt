@@ -28,7 +28,8 @@ class CheckOutActivity : AppCompatActivity() {
 
         listenCartDatabase()
 
-//        fetchCheckOutDatabase()
+        fetchCheckOutDatabase()
+//        fetchCheckOutList()
 
 
 
@@ -41,15 +42,13 @@ class CheckOutActivity : AppCompatActivity() {
 
 
     }
-    val checkOutMap = HashMap<String,HashMap<String,List<HashMap<String,ItemCart>>>?>()
+
+    var listOfItemCart : ArrayList<List<ItemCart>> = ArrayList()
+
     private fun fetchCheckOutList(){
-        checkOutMap.values.forEach {
-            it?.values?.forEach {
-                it.forEach {
-                    it.values.forEach {
-                        Log.d("CheckOutActivity","${it.id}")
-                    }
-                }
+        listOfItemCart.forEach {
+            it.forEach {
+                Log.d("CheckOutActivity","The id ${it.id}")
             }
         }
     }
@@ -60,12 +59,13 @@ class CheckOutActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-                val t  = object : GenericTypeIndicator<HashMap<String,List<HashMap<String,ItemCart>>>>(){}
+//                val t  = object : GenericTypeIndicator<Map<String,List<ItemCart>>>(){}
 
-                    val listCheckOut : HashMap<String,List<HashMap<String,ItemCart>>>? = it.getValue(t)
-                    checkOutMap[it.key!!] = listCheckOut
-                    Log.d("CheckOutActivity",listCheckOut.toString())
-//                    fetchCheckOutList()
+                    val listCheckOut : Map<String,List<ItemCart>> =  it.getValue() as (Map<String,List<ItemCart>>)
+                    Log.d("CheckOutActivity","The list of map ${listCheckOut.toString()}")
+
+
+
                 }
             }
 
