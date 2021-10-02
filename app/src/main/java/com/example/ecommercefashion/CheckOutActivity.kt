@@ -1,5 +1,6 @@
 package com.example.ecommercefashion
 
+import android.nfc.Tag
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,9 @@ import com.xwray.groupie.viewbinding.BindableItem
 class CheckOutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckOutBinding
+    companion object{
+        val TAG = "CheckOutActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,8 @@ class CheckOutActivity : AppCompatActivity() {
         listenCartDatabase()
 
         fetchCheckOutDatabase()
-//        fetchCheckOutList()
+
+        fetchCheckOutList()
 
 
 
@@ -43,13 +48,14 @@ class CheckOutActivity : AppCompatActivity() {
 
     }
 
-    var listOfItemCart : ArrayList<List<ItemCart>> = ArrayList()
+    var listOfListItemCart  = HashMap<String,ArrayList<ItemCart?>>()
 
     private fun fetchCheckOutList(){
-        listOfItemCart.forEach {
-            it.forEach {
-                Log.d("CheckOutActivity","The id ${it.id}")
-            }
+        //The function fetch not done yet so can't have data
+        Log.d("CheckOutActivity","Called fetch function")
+
+        listOfListItemCart.values.forEach {
+            Log.d(TAG,it.toString())
         }
     }
 
@@ -59,14 +65,15 @@ class CheckOutActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-//                val t  = object : GenericTypeIndicator<Map<String,List<ItemCart>>>(){}
-
-                    val listCheckOut : Map<String,List<ItemCart>> =  it.getValue() as (Map<String,List<ItemCart>>)
-                    Log.d("CheckOutActivity","The list of map ${listCheckOut.toString()}")
-
-
-
+                    val listItem : ArrayList<ItemCart?> = ArrayList()
+                    it.children.forEach {
+                        val item : ItemCart? = it.getValue(ItemCart::class.java)
+                        Log.d(TAG,item.toString())
+                        listItem.add(item)
+                    }
+                    listOfListItemCart[it.key!!] = listItem
                 }
+                fetchCheckOutList()
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -86,6 +93,7 @@ class CheckOutActivity : AppCompatActivity() {
                 val refGetKey = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
                 val key = refGetKey.key
                 snapshot.children.forEach {
+                    //TODO: Edit here save to list of itemcart not push to a node
                     val shopItem = it.getValue(ItemCart::class.java)
                     if (shopItem != null) {
                         saveToCheckOutDatabase(shopItem,key)
