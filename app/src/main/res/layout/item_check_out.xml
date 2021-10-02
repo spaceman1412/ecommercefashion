@@ -8,7 +8,7 @@
     >
 
     <ImageView
-        android:id="@+id/primaryImage_imageView_checkOut"
+        android:id="@+id/primaryImage_imageView_itemcheckOut"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:scaleType="centerCrop"
@@ -22,9 +22,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/primaryImage_imageView_checkOut"
-        app:layout_constraintStart_toEndOf="@+id/primaryImage_imageView_checkOut"
-        app:layout_constraintTop_toTopOf="@+id/primaryImage_imageView_checkOut">
+        app:layout_constraintBottom_toBottomOf="@+id/primaryImage_imageView_itemcheckOut"
+        app:layout_constraintStart_toEndOf="@+id/primaryImage_imageView_itemcheckOut"
+        app:layout_constraintTop_toTopOf="@+id/primaryImage_imageView_itemcheckOut">
 
         <TextView
             android:id="@+id/titleName_textView_itemCheckOut"
