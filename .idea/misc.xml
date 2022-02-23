@@ -5,9 +5,13 @@
       <map>
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/circle_black_shoppingbag.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/circle_border_category.xml" value="0.2703125" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.25104166666666666" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_baseline_shopping_bag_24.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_circle.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_indicator_selected.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_indicator_unselected.xml" value="0.2703125" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_outline_login_24.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_outline_search_24.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/ic_outline_shopping_bag_24.xml" value="0.2703125" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/drawable/radio_selected.xml" value="0.2703125" />
@@ -20,7 +24,7 @@
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_check_out_large.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_item_detail.xml" value="0.2" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_login_sreen.xml" value="0.24003623188405798" />
-        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_main.xml" value="0.4850894632206759" />
+        <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_main.xml" value="0.42162162162162165" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_seach.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/activity_shopping_cart.xml" value="0.264" />
         <entry key="..\:/Users/Space/AndroidStudioProjects/EcommerceFashion/app/src/main/res/layout/fragment_blank.xml" value="0.19384057971014493" />

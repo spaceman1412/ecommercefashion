@@ -27,6 +27,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/menu_mainActivity"
                 android:layout_width="35sp"
                 android:layout_height="30dp"
                 android:layout_alignParentStart="true"
@@ -50,6 +51,15 @@
                     android:layout_height="30dp"
                     android:layout_marginRight="16dp"
                     android:src="@drawable/ic_outline_shopping_bag_24" />
+
+                <ImageView
+                    android:id="@+id/logout_imageView_mainActivity"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="16dp"
+
+                    android:src="@drawable/ic_outline_login_24" />
+
             </LinearLayout>
         </RelativeLayout>
 

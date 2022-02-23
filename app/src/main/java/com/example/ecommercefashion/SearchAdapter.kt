@@ -38,6 +38,15 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
             listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
             listOf("Shirt")
         ),
+        ItemCart(
+            "3",
+            "Hiphop Shirt",
+            58,
+            "man",
+            R.drawable.hiphop_tee,
+            listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
+            listOf("Shirt")
+        ),
     )
 
 

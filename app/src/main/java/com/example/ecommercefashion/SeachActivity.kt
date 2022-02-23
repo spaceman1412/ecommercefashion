@@ -25,7 +25,7 @@ class SeachActivity : AppCompatActivity() {
             "man",
             R.drawable.pants,
             listOf(R.drawable.pants_list, R.drawable.hiphop_list),
-            listOf("Trouser", "Winter")
+            listOf("Trousers", "Winter Collection")
         ),
         ItemCart(
             "2",
@@ -34,6 +34,15 @@ class SeachActivity : AppCompatActivity() {
             "man",
             R.drawable.whitetee,
             listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
+            listOf("Shirt")
+        ),
+        ItemCart(
+            "3",
+            "Hiphop Shirt",
+            58,
+            "man",
+            R.drawable.hiphop_tee,
+            listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
             listOf("Shirt")
         ),
     )

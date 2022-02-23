@@ -35,12 +35,16 @@ class MainActivity : AppCompatActivity() {
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         Log.d("MainActivity", "The current user is ${currentUser?.uid.toString()}")
+
         if (currentUser == null) {
             val intent = Intent(this, LoginSreen::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
         }
 
+        binding.menuMainActivity.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+        }
 
         val icon: ImageView = binding.searchIconMainActivity
         icon.setOnClickListener {
@@ -55,6 +59,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.logoutImageViewMainActivity.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this,LoginSreen::class.java)
+            startActivity(intent)
+        }
+
         val recyclerView_large: RecyclerView = binding.recyclerViewLargeMainActivity
 
         val item_detail_list = listOf<ItemCart>(
@@ -65,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 "man",
                 R.drawable.pants,
                 listOf(R.drawable.pants_list, R.drawable.hiphop_list),
-                listOf("Trouser", "Winter")
+                listOf("Trousers", "Winter Collection")
             ),
             ItemCart(
                 "2",
@@ -74,6 +84,15 @@ class MainActivity : AppCompatActivity() {
                 "man",
                 R.drawable.whitetee,
                 listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
+                listOf("Shirt")
+            ),
+            ItemCart(
+                "3",
+                "Hiphop Shirt",
+                58,
+                "man",
+                R.drawable.hiphop_tee,
+                listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
                 listOf("Shirt")
             ),
         )
@@ -90,14 +109,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.searchIconMainActivity.setOnClickListener {
-            val intent = Intent(this,SeachActivity::class.java)
+            val intent = Intent(this, SeachActivity::class.java)
             startActivity(intent)
         }
 
 
+//        adapter_large.add(ItemLarge(item_detail_list[0]))
+//        adapter_large.add(ItemLarge(item_detail_list[1]))
+        item_detail_list.forEach {
+            adapter_large.add(ItemLarge(it))
+        }
 
-        adapter_large.add(ItemLarge(item_detail_list[0]))
-        adapter_large.add(ItemLarge(item_detail_list[1]))
         adapter_large.setOnItemClickListener { item, view ->
             val intent = Intent(this, ItemDetail::class.java)
             val shopItem = item as ItemLarge
@@ -108,8 +130,9 @@ class MainActivity : AppCompatActivity() {
         val adapter_small = GroupAdapter<GroupieViewHolder>()
         binding.smallRecyclerViewMainActivity.adapter = adapter_small
 
-        adapter_small.add(ItemSmall(item_detail_list[0]))
-        adapter_small.add(ItemSmall(item_detail_list[1]))
+        item_detail_list.forEach {
+            adapter_small.add(ItemSmall(it))
+        }
 
         adapter_small.setOnItemClickListener { item, view ->
             val intent = Intent(this, ItemDetail::class.java)
@@ -117,9 +140,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(USER_KEY, shopItem.item_detail)
             startActivity(intent)
         }
-
-
-
     }
 
     private fun filterAdapterLarge() {
@@ -142,6 +162,15 @@ class MainActivity : AppCompatActivity() {
                 "man",
                 R.drawable.whitetee,
                 listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
+                listOf("Shirt")
+            ),
+            ItemCart(
+                "3",
+                "Hiphop Shirt",
+                58,
+                "man",
+                R.drawable.hiphop_tee,
+                listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
                 listOf("Shirt")
             ),
         )

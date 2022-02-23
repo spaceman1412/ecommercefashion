@@ -52,8 +52,6 @@ class RegisterFragment : Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
-
-
         return binding.root
     }
     private fun performRegister(){

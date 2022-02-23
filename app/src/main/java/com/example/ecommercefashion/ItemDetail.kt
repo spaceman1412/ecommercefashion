@@ -44,6 +44,7 @@ class ItemDetail : AppCompatActivity() {
         val add_to_cart : LinearLayout = binding.addToCartBtnItemDetail
         val uid = FirebaseAuth.getInstance().uid
         add_to_cart.setOnClickListener {
+            Log.e("ItemDetail","Clicked add to cart")
             val ref = FirebaseDatabase.getInstance().getReference("cart/$uid").push()
             shopItem?.id = ref.key
             ref.setValue(shopItem)

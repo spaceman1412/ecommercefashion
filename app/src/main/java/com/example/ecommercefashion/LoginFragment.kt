@@ -47,11 +47,11 @@ class LoginFragment : Fragment() {
                 email.text.toString(),passwd.text.toString()
             )
                 .addOnCompleteListener {
-                if(!it.isSuccessful) return@addOnCompleteListener
-                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                Log.d(TAG,"Login successfully ${currentUser.toString()}")
-                val intent = Intent(activity,MainActivity::class.java)
-                startActivity(intent)
+                    if(!it.isSuccessful) return@addOnCompleteListener
+                    val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                    Log.d(TAG,"Login successfully ${currentUser.toString()}")
+                    val intent = Intent(activity,MainActivity::class.java)
+                    startActivity(intent)
             }
                 .addOnFailureListener {
                     Log.d(TAG,it.message.toString())
