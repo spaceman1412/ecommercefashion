@@ -39,7 +39,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         binding.recyclerViewShoppingCart.adapter = adapter
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
-//        adapter.add(ShopItem("AAAA"))
+
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -54,7 +54,7 @@ class ShoppingCartActivity : AppCompatActivity() {
                         price += shopItem.price
                         Log.d(TAG, "Value is null")
                         Log.d(TAG, "Added to adapter ${shopItem.id}")
-                    }
+                    }else Log.e("ShoppingCart","Item shop is null")
                 }
                 binding.priceTextViewActivityShoppingCart.text = "$$price"
             }
@@ -76,6 +76,12 @@ class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>()
     override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
         viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
         viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
+        viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
+            Log.e("ShoppingCart","Delete Clicked")
+            val uid = FirebaseAuth.getInstance().uid
+            FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}").removeValue()
+
+        }
     }
 
     override fun getLayout(): Int {
