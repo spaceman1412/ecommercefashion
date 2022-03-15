@@ -10,7 +10,7 @@ This is a ecommerce-app. This app created for selling clothes online.
 Clone this repository and import into **Android Studio**
 ```bash
 git clone git@github.com:wolox/<reponame>.git
-``
+```
 
 ## Built with
 * Kotlin
