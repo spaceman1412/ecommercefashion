@@ -22,9 +22,13 @@ import com.xwray.groupie.viewbinding.BindableItem
 class ShoppingCartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShoppingCartBinding
-    private var price : Int = 0
+    private var price: Int = 0
+    private var listShopItem : MutableList<ShopItem> = mutableListOf()
+
+
     companion object {
         val TAG = "ShoppingCart"
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,62 +37,87 @@ class ShoppingCartActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+
+
         val adapter = GroupAdapter<GroupieViewHolder>()
 
 
+
         binding.recyclerViewShoppingCart.adapter = adapter
+
+        listenCartList()
+
+        listShopItem.forEach {
+            Log.e(TAG,"List"+it.shopItem.id.toString())
+            adapter.add(it)
+        }
+
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
+
+
+        binding.checkOutButtonShoppingCart.setOnClickListener {
+            val intent = Intent(this, CheckOutActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun listenCartList() {
+        Log.e(ShoppingCartActivity.TAG, "Calling")
+
+
+        val uid = FirebaseAuth.getInstance().uid
 
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                Log.e(ShoppingCartActivity.TAG, "Data changing")
                 snapshot.children.forEach {
                     val shopItem = it.getValue(ItemCart::class.java)
 
                     //TODO: Create function to save item in current shopping cart to checkout database
 
                     if (shopItem != null) {
-                        adapter.add(ShopItem(shopItem))
+                        listShopItem.add(ShopItem(shopItem))
 
                         price += shopItem.price
-                        Log.d(TAG, "Value is null")
-                        Log.d(TAG, "Added to adapter ${shopItem.id}")
-                    }else Log.e("ShoppingCart","Item shop is null")
+                        Log.d(ShoppingCartActivity.TAG, "Value is null")
+                        Log.d(ShoppingCartActivity.TAG, "Added to adapter ${shopItem.id}")
+                    } else Log.e("ShoppingCart", "Item shop is null")
                 }
-                binding.priceTextViewActivityShoppingCart.text = "$$price"
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, "Failed to adapter")
+                Log.d(ShoppingCartActivity.TAG, "Failed to adapter")
             }
         })
+        Log.e(TAG,listShopItem.toString())
 
-        binding.checkOutButtonShoppingCart.setOnClickListener {
-            val intent = Intent(this,CheckOutActivity::class.java)
-            startActivity(intent)
+    }
+
+    class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>() {
+        override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
+            viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
+            viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
+            viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
+                Log.e("ShoppingCart", "Delete Clicked")
+                val uid = FirebaseAuth.getInstance().uid
+                FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}")
+                    .removeValue()
+            }
+
+        }
+
+        override fun getLayout(): Int {
+            return R.layout.item_shopping_cart
+        }
+
+        override fun initializeViewBinding(view: View): ItemShoppingCartBinding {
+            return ItemShoppingCartBinding.bind(view)
         }
     }
 
 }
 
-class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>() {
-    override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
-        viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
-        viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
-        viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
-            Log.e("ShoppingCart","Delete Clicked")
-            val uid = FirebaseAuth.getInstance().uid
-            FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}").removeValue()
 
-        }
-    }
 
-    override fun getLayout(): Int {
-        return R.layout.item_shopping_cart
-    }
-
-    override fun initializeViewBinding(view: View): ItemShoppingCartBinding {
-        return ItemShoppingCartBinding.bind(view)
-    }
-}
