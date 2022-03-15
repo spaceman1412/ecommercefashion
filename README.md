@@ -14,6 +14,6 @@ git clone git@github.com:wolox/<reponame>.git
 
 ## Built with
 * Kotlin
-* [Firebase] (https://firebase.google.com/) 
-* [CircleIndicator] (https://github.com/ongakuer/CircleIndicator) 
-* [Groupie] (https://github.com/lisawray/groupie)
+* [Firebase](https://firebase.google.com/) 
+* [CircleIndicator](https://github.com/ongakuer/CircleIndicator) 
+* [Groupie](https://github.com/lisawray/groupie)
