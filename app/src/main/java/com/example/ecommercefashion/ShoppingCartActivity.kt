@@ -18,18 +18,20 @@ import com.xwray.groupie.GroupieAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.viewbinding.BindableItem
+import kotlinx.coroutines.*
+
 
 class ShoppingCartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShoppingCartBinding
     private var price: Int = 0
-    private var listShopItem : MutableList<ShopItem> = mutableListOf()
-
+    private var listShopItem: MutableList<ShopItem> = mutableListOf()
+    val adapter = GroupAdapter<GroupieViewHolder>()
 
     companion object {
         val TAG = "ShoppingCart"
-
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,20 +39,21 @@ class ShoppingCartActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-
-
-        val adapter = GroupAdapter<GroupieViewHolder>()
-
-
-
         binding.recyclerViewShoppingCart.adapter = adapter
 
-        listenCartList()
 
-        listShopItem.forEach {
-            Log.e(TAG,"List"+it.shopItem.id.toString())
-            adapter.add(it)
+        GlobalScope.launch {
+            suspend {
+                listenCartList()
+                Log.d(TAG, "Test run main scope")
+                delay(2000L)
+                runOnUiThread {
+                    addToAdapter()
+                }
+            }.invoke()
         }
+
+        adapter.update(listShopItem)
 
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
@@ -60,11 +63,20 @@ class ShoppingCartActivity : AppCompatActivity() {
             val intent = Intent(this, CheckOutActivity::class.java)
             startActivity(intent)
         }
+
+
+    }
+
+    private fun addToAdapter() {
+        Log.d(TAG, "Calling add adapter")
+        listShopItem.forEach {
+            Log.d(TAG, "${it.shopItem.name} main scope")
+            adapter.add(it)
+        }
     }
 
     private fun listenCartList() {
         Log.e(ShoppingCartActivity.TAG, "Calling")
-
 
         val uid = FirebaseAuth.getInstance().uid
 
@@ -79,23 +91,27 @@ class ShoppingCartActivity : AppCompatActivity() {
 
                     if (shopItem != null) {
                         listShopItem.add(ShopItem(shopItem))
+                        listShopItem.forEach {
+                            Log.d(TAG, "${it.shopItem.name} function scope")
+                        }
 
                         price += shopItem.price
-                        Log.d(ShoppingCartActivity.TAG, "Value is null")
-                        Log.d(ShoppingCartActivity.TAG, "Added to adapter ${shopItem.id}")
+                        Log.d(TAG, "Value is null")
+                        Log.d(TAG, "Added to adapter ${shopItem.id}")
                     } else Log.e("ShoppingCart", "Item shop is null")
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.d(ShoppingCartActivity.TAG, "Failed to adapter")
+                Log.d(TAG, "Failed to adapter")
             }
         })
-        Log.e(TAG,listShopItem.toString())
-
+        Log.e(TAG, listShopItem.toString())
     }
 
-    class ShopItem(val shopItem: ItemCart) : BindableItem<ItemShoppingCartBinding>() {
+
+    class ShopItem(val shopItem: ItemCart) :
+        BindableItem<ItemShoppingCartBinding>() {
         override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
             viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
             viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
@@ -104,8 +120,9 @@ class ShoppingCartActivity : AppCompatActivity() {
                 val uid = FirebaseAuth.getInstance().uid
                 FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}")
                     .removeValue()
-            }
 
+
+            }
         }
 
         override fun getLayout(): Int {
@@ -116,7 +133,6 @@ class ShoppingCartActivity : AppCompatActivity() {
             return ItemShoppingCartBinding.bind(view)
         }
     }
-
 }
 
 
