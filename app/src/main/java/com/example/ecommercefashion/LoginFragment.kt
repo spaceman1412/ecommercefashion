@@ -15,8 +15,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginFragment : Fragment() {
 
-
-
     companion object{
         val TAG = "Login"
     }
@@ -28,12 +26,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-//        val view= inflater.inflate(R.layout.fragment_login, container, false)
+        //val view= inflater.inflate(R.layout.fragment_login, container, false)
 
         binding = FragmentLoginBinding.inflate(inflater,container,false)
 
         val register_btn = binding.registerButtonLogin
-
 
         register_btn.setOnClickListener {
             Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_registerFragment)

@@ -54,10 +54,7 @@ class SeachActivity : AppCompatActivity() {
         binding = ActivitySeachBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.recyclerViewSearchActivity.adapter = adapter
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

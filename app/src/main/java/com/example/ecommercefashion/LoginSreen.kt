@@ -10,7 +10,5 @@ class LoginSreen : AppCompatActivity() {
         setContentView(R.layout.activity_login_sreen)
         supportActionBar?.hide()
 
-
-
     }
 }

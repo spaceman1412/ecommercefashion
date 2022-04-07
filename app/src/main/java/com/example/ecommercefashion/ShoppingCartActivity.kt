@@ -3,6 +3,7 @@ package com.example.ecommercefashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
@@ -25,11 +26,12 @@ class ShoppingCartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShoppingCartBinding
     private var price: Int = 0
-    private var listShopItem: MutableList<ShopItem> = mutableListOf()
+
     val adapter = GroupAdapter<GroupieViewHolder>()
 
     companion object {
         val TAG = "ShoppingCart"
+        var listShopItem: MutableList<ShopItem> = mutableListOf()
     }
 
 
@@ -42,18 +44,20 @@ class ShoppingCartActivity : AppCompatActivity() {
         binding.recyclerViewShoppingCart.adapter = adapter
 
 
+//        GlobalScope.launch {
+//            listenCartList()
+//            addToAdapter()
+//        }
+
         GlobalScope.launch {
-            suspend {
-                listenCartList()
-                Log.d(TAG, "Test run main scope")
-                delay(2000L)
-                runOnUiThread {
-                    addToAdapter()
-                }
-            }.invoke()
+            listenCartList()
+            delay(5000L)
+//            runOnUiThread {
+//                addToAdapter()
+//                println("Without delay")
+//            }
         }
 
-        adapter.update(listShopItem)
 
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
@@ -63,26 +67,38 @@ class ShoppingCartActivity : AppCompatActivity() {
             val intent = Intent(this, CheckOutActivity::class.java)
             startActivity(intent)
         }
-
-
     }
 
     private fun addToAdapter() {
-        Log.d(TAG, "Calling add adapter")
+
+        Log.d(TAG, "Called add to Adapter")
         listShopItem.forEach {
             Log.d(TAG, "${it.shopItem.name} main scope")
             adapter.add(it)
         }
     }
 
+
     private fun listenCartList() {
         Log.e(ShoppingCartActivity.TAG, "Calling")
 
+        GlobalScope.launch {
+            getReference()
+            println("Done")
+        }
+
+        Log.e(TAG, listShopItem.toString())
+    }
+
+    private suspend fun getReference() {
         val uid = FirebaseAuth.getInstance().uid
 
+
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                listShopItem.clear()
+
                 Log.e(ShoppingCartActivity.TAG, "Data changing")
                 snapshot.children.forEach {
                     val shopItem = it.getValue(ItemCart::class.java)
@@ -91,22 +107,28 @@ class ShoppingCartActivity : AppCompatActivity() {
 
                     if (shopItem != null) {
                         listShopItem.add(ShopItem(shopItem))
-                        listShopItem.forEach {
-                            Log.d(TAG, "${it.shopItem.name} function scope")
-                        }
 
                         price += shopItem.price
                         Log.d(TAG, "Value is null")
                         Log.d(TAG, "Added to adapter ${shopItem.id}")
                     } else Log.e("ShoppingCart", "Item shop is null")
                 }
+
+
+                adapter.clear()
+                addToAdapter()
+                adapter.notifyDataSetChanged()
+
+
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d(TAG, "Failed to adapter")
             }
+
         })
-        Log.e(TAG, listShopItem.toString())
+
+
     }
 
 
@@ -120,8 +142,6 @@ class ShoppingCartActivity : AppCompatActivity() {
                 val uid = FirebaseAuth.getInstance().uid
                 FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}")
                     .removeValue()
-
-
             }
         }
 
