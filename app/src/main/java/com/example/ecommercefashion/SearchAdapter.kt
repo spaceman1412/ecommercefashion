@@ -19,35 +19,7 @@ import org.w3c.dom.Text
 class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
                     val context: Context) :
     RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterable {
-    private val item_detail_list_all = mutableListOf(
-        ItemCart(
-            "1",
-            "Cotton Pant",
-            58,
-            "man",
-            R.drawable.pants,
-            listOf(R.drawable.pants_list, R.drawable.hiphop_list),
-            listOf("Trousers", "Winter Collection")
-        ),
-        ItemCart(
-            "2",
-            "White Shirt",
-            58,
-            "man",
-            R.drawable.whitetee,
-            listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
-            listOf("Shirt")
-        ),
-        ItemCart(
-            "3",
-            "Hiphop Shirt",
-            58,
-            "man",
-            R.drawable.hiphop_tee,
-            listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
-            listOf("Shirt")
-        ),
-    )
+    private val item_detail_list_all = item_detail_list
 
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -13,9 +13,6 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".CheckOutLarge"
-            android:exported="true" />
-        <activity
             android:name=".SeachActivity"
             android:exported="true" />
         <activity
