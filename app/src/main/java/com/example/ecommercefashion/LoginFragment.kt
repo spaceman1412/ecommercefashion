@@ -25,14 +25,16 @@ import java.lang.Exception
 
 class LoginFragment : Fragment() {
 
-    companion object{
+    companion object {
         val TAG = "Login"
         private const val RC_SIGN_IN = 100
 
     }
+
     private lateinit var binding: FragmentLoginBinding
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
+
     //constants
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,18 +43,20 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         //val view= inflater.inflate(R.layout.fragment_login, container, false)
 
-        binding = FragmentLoginBinding.inflate(inflater,container,false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         val register_btn = binding.signUpText
 
         register_btn.setOnClickListener {
-            Navigation.findNavController(binding.root).navigate(R.id.action_loginFragment_to_registerFragment)
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_loginFragment_to_registerFragment)
         }
         // configure the Google SignIn
-        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail() // we only need email from google account
-            .build()
+        val googleSignInOptions =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail() // we only need email from google account
+                .build()
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions)
 
@@ -67,34 +71,46 @@ class LoginFragment : Fragment() {
         }
         checkUser()
 
-        val login_btn : Button = binding.loginButtonLogin
-        val email : EditText = binding.emailEditTextLogin
-        val passwd : EditText = binding.passwdEditTextLogin
+        val login_btn: Button = binding.loginButtonLogin
+        val email: EditText = binding.emailEditTextLogin
+        val passwd: EditText = binding.passwdEditTextLogin
 
         login_btn.setOnClickListener {
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                email.text.toString(),passwd.text.toString()
-            )
-                .addOnCompleteListener {
-                    if(!it.isSuccessful) return@addOnCompleteListener
-                    val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                    Log.d(TAG,"Login successfully ${currentUser.toString()}")
-                    val intent = Intent(activity,MainActivity::class.java)
-                    startActivity(intent)
+            if (checkAdmin(email.text.toString(), passwd.text.toString())) {
+                val intent = Intent(activity, AdminActivity::class.java)
+                startActivity(intent)
+            } else {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                    email.text.toString(), passwd.text.toString()
+                )
+                    .addOnCompleteListener {
+                        if (!it.isSuccessful) return@addOnCompleteListener
+                        val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                        Log.d(TAG, "Login successfully ${currentUser.toString()}")
+                        val intent = Intent(activity, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    .addOnFailureListener {
+                        Log.d(TAG, it.message.toString())
+                    }
             }
-                .addOnFailureListener {
-                    Log.d(TAG,it.message.toString())
-                }
         }
         return binding.root
+    }
+
+    private fun checkAdmin(email: String, password: String): Boolean {
+        val adminEmail: String = "thiennguyenadmin@gmail.com"
+        val adminPassword: String = "123456"
+
+        return adminEmail == email && adminPassword == password
     }
 
     private fun checkUser() {
         //check if user is logged in or not
         val firebaseUser = firebaseAuth.currentUser
-        if(firebaseUser != null) {
+        if (firebaseUser != null) {
             //user is already logged in
-            val intent = Intent(activity,MainActivity::class.java)
+            val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -109,8 +125,7 @@ class LoginFragment : Fragment() {
                 //Google sign in successful, now auth with firebase
                 val account = accountTask.getResult(ApiException::class.java)
                 firebaseAuthWithGoogleAccount(account)
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.d(TAG, "onActivityResult: ${e.message}")
             }
         }
@@ -130,16 +145,15 @@ class LoginFragment : Fragment() {
                 Log.d(TAG, "firebaseAuthWithGoogleAccount: Uid: $uid")
                 Log.d(TAG, "firebaseAuthWithGoogleAccount: Email: $email")
                 // check if user is new or existing
-                if(authResult.additionalUserInfo!!.isNewUser) {
+                if (authResult.additionalUserInfo!!.isNewUser) {
                     // user is new - Account created
                     Log.d(TAG, "firebaseAuthWithGoogleAccount: Account created...\n$email")
                     Toast.makeText(this.context, "Account created...", Toast.LENGTH_SHORT).show()
-                }
-                else {
+                } else {
                     Log.d(TAG, "firebaseAuthWithGoogleAccount: Existing user...\n$email")
                 }
                 // start profile activity
-                val intent = Intent(activity,MainActivity::class.java)
+                val intent = Intent(activity, MainActivity::class.java)
                 startActivity(intent)
 
             }
