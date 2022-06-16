@@ -2,4 +2,15 @@
     <string name="app_name">EcommerceFashion</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="sign_in_account">Sign in to your</string>
+    <string name="forgot_text">Password Retrieval</string>
+    <string name="register_text"><u>Register Now</u></string>
+    <string name="account">Account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="login_with">Login with</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="email_id">Email ID</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password ?</string>
 </resources>
