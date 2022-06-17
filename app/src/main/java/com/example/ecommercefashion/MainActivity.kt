@@ -95,8 +95,6 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerView_large: RecyclerView = binding.recyclerViewLargeMainActivity
 
-        val imageView = binding.imageView3
-        Glide.with(this).load("https://lh6.ggpht.com/9SZhHdv4URtBzRmXpnWxZcYhkgTQurFuuQ8OR7WZ3R7fyTmha77dYkVvcuqMu3DLvMQ=w300").into(imageView)
 
 
         fetchProductList()
@@ -219,7 +217,7 @@ class ItemLarge(val item_detail: ItemCart) : BindableItem<ItemLargeMainactivityB
         viewBinding.titleNameTextViewLargeItem.text = item_detail.name
         viewBinding.priceTextViewLargeItem.text = "$${item_detail.price}"
         val imageView = viewBinding.primaryImageImageViewLargeItem
-//        Glide.with(viewBinding.root.context).load("http://goo.gl/gEgYUd").into(imageView)
+        Glide.with(viewBinding.root.context).load(item_detail.primaryImageUrl).into(imageView)
         viewBinding.sexTextViewLargeItem.text = "For ${item_detail.sex}"
     }
 
