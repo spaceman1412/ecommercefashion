@@ -164,22 +164,20 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if(count == titles.size) adapter_large.add(ItemLarge(it))
+
                 }
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d("MainActivity",error.message.toString())
             }
-
-
         })
-
+        adapter_large.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ItemDetail::class.java)
+            val shopItem = item as ItemLarge
+            intent.putExtra(USER_KEY, shopItem.item_detail)
+            startActivity(intent)
+        }
         binding.recyclerViewLargeMainActivity.adapter = adapter_large
-
-
-
-
-
-
     }
 }
 
