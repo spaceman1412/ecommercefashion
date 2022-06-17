@@ -143,8 +143,8 @@ class CheckOutItemList(layoutInflater: LayoutInflater,listItem : ArrayList<ItemC
             val child : View = layoutInflater.inflate(R.layout.item_check_out,null)
             child.findViewById<TextView>(R.id.titleName_textView_itemCheckOut).text = it?.name
             child.findViewById<TextView>(R.id.price_textView_itemCheckOut).text = "$${it?.price}"
-            child.findViewById<ImageView>(R.id.primaryImage_imageView_itemcheckOut).setImageResource(
-                it!!.primaryImage)
+//            child.findViewById<ImageView>(R.id.primaryImage_imageView_itemcheckOut).setImageResource(
+//                it!!.primaryImage)
             viewBinding.linearLayoutCheckOut.addView(child)
         }
     }

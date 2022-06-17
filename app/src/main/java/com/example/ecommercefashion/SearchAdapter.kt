@@ -37,7 +37,7 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = item_detail_list[position].name
         holder.price.text = "$${item_detail_list[position].price}"
-        holder.image.setImageResource(item_detail_list[position].primaryImage)
+//        holder.image.setImageResource(item_detail_list[position].primaryImage)
         holder.layout.setOnClickListener {
             val intent = Intent(context,ItemDetail::class.java)
             intent.putExtra(MainActivity.USER_KEY,item_detail_list[position])

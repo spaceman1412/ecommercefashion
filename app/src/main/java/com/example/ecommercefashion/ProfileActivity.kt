@@ -15,10 +15,16 @@ class ProfileActivity : AppCompatActivity() {
 
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.notificationProfileCardView.setOnClickListener {
+            val intent = Intent(this,NotificationActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.editInformationProfileCardView.setOnClickListener {
             Log.d("ProfileActivity","Clicked")
             val intent = Intent(this,EditInfoActivity::class.java)
             startActivity(intent)
         }
+
     }
 }

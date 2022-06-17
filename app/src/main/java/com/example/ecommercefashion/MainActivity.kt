@@ -1,16 +1,14 @@
 package com.example.ecommercefashion
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ItemLargeMainactivityBinding
 import com.example.ecommercefashion.databinding.ItemSmallMainActivityBinding
@@ -29,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     companion object {
+        val TAG = "MainActivity"
         val USER_KEY = "USER_KEY"
         val adapter_large = GroupAdapter<GroupieViewHolder>()
         val adapter_small = GroupAdapter<GroupieViewHolder>()
@@ -40,6 +39,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        val productList = mutableListOf<ItemCart>()
+
+        val item_cart = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+
+        productList.add(item_cart)
+        productList.add(item_cart)
+        productList.add(item_cart)
+
+//        val ref = FirebaseDatabase.getInstance().getReference("products").push()
+//        item_cart.id = ref.key
+//        ref.setValue(item_cart)
+//            .addOnCompleteListener {
+//                Log.d(TAG,"Saved value to database ${ref.key}")
+//            }
+//            .addOnFailureListener {
+//                Log.d(TAG,it.message.toString())
+//            }
+
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         Log.d("MainActivity", "The current user is ${currentUser?.uid.toString()}")
@@ -75,6 +94,10 @@ class MainActivity : AppCompatActivity() {
 
 
         val recyclerView_large: RecyclerView = binding.recyclerViewLargeMainActivity
+
+        val imageView = binding.imageView3
+        Glide.with(this).load("https://lh6.ggpht.com/9SZhHdv4URtBzRmXpnWxZcYhkgTQurFuuQ8OR7WZ3R7fyTmha77dYkVvcuqMu3DLvMQ=w300").into(imageView)
+
 
         fetchProductList()
 
@@ -112,13 +135,23 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
+
+    private fun setUpProductDatabase( productList: MutableList<ItemCart>)
+    {
+
+    }
+
     private fun fetchProductList()
     {
+        Log.d(TAG, "fetchProductList: ")
         val ref = FirebaseDatabase.getInstance().getReference("/products")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
                     val item_cart : ItemCart? = it.getValue(ItemCart::class.java)
+                    Log.d(TAG, "onDataChange: ${it.toString()}")
                     if(item_cart != null)
                     {
                         adapter_large.add(ItemLarge(item_cart))
@@ -185,7 +218,8 @@ class ItemLarge(val item_detail: ItemCart) : BindableItem<ItemLargeMainactivityB
     override fun bind(viewBinding: ItemLargeMainactivityBinding, position: Int) {
         viewBinding.titleNameTextViewLargeItem.text = item_detail.name
         viewBinding.priceTextViewLargeItem.text = "$${item_detail.price}"
-        viewBinding.primaryImageImageViewLargeItem.setImageResource(item_detail.primaryImage)
+        val imageView = viewBinding.primaryImageImageViewLargeItem
+//        Glide.with(viewBinding.root.context).load("http://goo.gl/gEgYUd").into(imageView)
         viewBinding.sexTextViewLargeItem.text = "For ${item_detail.sex}"
     }
 
@@ -202,7 +236,7 @@ class ItemSmall(val item_detail: ItemCart) : BindableItem<ItemSmallMainActivityB
     override fun bind(viewBinding: ItemSmallMainActivityBinding, position: Int) {
         viewBinding.priceTextViewSmallItem.text = "$${item_detail.price}"
         viewBinding.titleNameTextViewSmallItem.text = item_detail.name
-        viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
+//        viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
     }
 
     override fun getLayout(): Int {

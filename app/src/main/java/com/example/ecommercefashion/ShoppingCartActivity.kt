@@ -136,7 +136,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         BindableItem<ItemShoppingCartBinding>() {
         override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
             viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
-            viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
+//            viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
             viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
                 Log.e("ShoppingCart", "Delete Clicked")
                 val uid = FirebaseAuth.getInstance().uid
