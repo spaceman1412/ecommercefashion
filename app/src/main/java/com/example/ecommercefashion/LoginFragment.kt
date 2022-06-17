@@ -53,7 +53,9 @@ class LoginFragment : Fragment() {
         }
         // configure the Google SignIn
         val googleSignInOptions =
+
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail() // we only need email from google account
                 .build()
@@ -88,10 +90,11 @@ class LoginFragment : Fragment() {
                         if (!it.isSuccessful) return@addOnCompleteListener
                         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                         Log.d(TAG, "Login successfully ${currentUser.toString()}")
+
                         var intent = Intent(activity, MainActivity::class.java)
 
 
-                        startActivity(intent)
+
                     }
                     .addOnFailureListener {
                         Log.d(TAG, it.message.toString())
@@ -102,8 +105,10 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkAdmin(email: String, password: String): Boolean {
+
         val adminEmail: String = "nnt.itute@gmail.com"
         val adminPassword: String = "ngocthien"
+
 
         return adminEmail == email && adminPassword == password
     }
@@ -125,6 +130,7 @@ class LoginFragment : Fragment() {
             Log.d(TAG, "onActivityResult: Google SignIn intent result")
             val accountTask = GoogleSignIn.getSignedInAccountFromIntent(data)
 
+
             //Google sign in successful, now auth with firebase
             val account = accountTask.getResult(ApiException::class.java)
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
@@ -140,8 +146,14 @@ class LoginFragment : Fragment() {
                 }
 
 
-        }
-    }
+
+            try {
+                //Google sign in successful, now auth with firebase
+                val account = accountTask.getResult(ApiException::class.java)
+                firebaseAuthWithGoogleAccount(account)
+            } catch (e: Exception) {
+                Log.d(TAG, "onActivityResult: ${e.message}")
+            }
 
     private fun firebaseAuthWithGoogleAccount(account: GoogleSignInAccount?) {
         Log.d(TAG, "firebaseAuthWithGoogleAccount: begin firebase with google account")

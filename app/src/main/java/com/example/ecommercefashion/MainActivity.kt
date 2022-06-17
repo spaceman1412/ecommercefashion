@@ -3,6 +3,8 @@ package com.example.ecommercefashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -15,6 +17,10 @@ import com.example.ecommercefashion.databinding.ItemSmallMainActivityBinding
 import com.example.ecommercefashion.models.ItemCart
 import com.google.android.material.chip.Chip
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.viewbinding.BindableItem
@@ -24,6 +30,9 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         val USER_KEY = "USER_KEY"
+        val adapter_large = GroupAdapter<GroupieViewHolder>()
+        val adapter_small = GroupAdapter<GroupieViewHolder>()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,42 +74,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         val recyclerView_large: RecyclerView = binding.recyclerViewLargeMainActivity
 
-        val item_detail_list = listOf<ItemCart>(
-            ItemCart(
-                "1",
-                "Cotton Pant",
-                58,
-                "man",
-                R.drawable.pants,
-                listOf(R.drawable.pants_list, R.drawable.hiphop_list),
-                listOf("Trousers", "Winter Collection")
-            ),
-            ItemCart(
-                "2",
-                "White Shirt",
-                58,
-                "man",
-                R.drawable.whitetee,
-                listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
-                listOf("Shirt")
-            ),
-            ItemCart(
-                "3",
-                "Hiphop Shirt",
-                58,
-                "man",
-                R.drawable.hiphop_tee,
-                listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
-                listOf("Shirt")
-            ),
-        )
+        fetchProductList()
 
-
-        val adapter_large = GroupAdapter<GroupieViewHolder>()
         recyclerView_large.adapter = adapter_large
-
 
         binding.chipGroupMainActivity.forEach { child ->
             (child as? Chip)?.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -108,16 +87,14 @@ class MainActivity : AppCompatActivity() {
                 filterAdapterLarge()
             }
         }
+
         binding.searchIconMainActivity.setOnClickListener {
             val intent = Intent(this, SeachActivity::class.java)
             startActivity(intent)
         }
-
-
-//        adapter_large.add(ItemLarge(item_detail_list[0]))
-//        adapter_large.add(ItemLarge(item_detail_list[1]))
-        item_detail_list.forEach {
-            adapter_large.add(ItemLarge(it))
+        binding.userIconMainActivity.setOnClickListener {
+            val intent = Intent(this,ProfileActivity::class.java)
+            startActivity(intent)
         }
 
         adapter_large.setOnItemClickListener { item, view ->
@@ -127,12 +104,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val adapter_small = GroupAdapter<GroupieViewHolder>()
         binding.smallRecyclerViewMainActivity.adapter = adapter_small
-
-        item_detail_list.forEach {
-            adapter_small.add(ItemSmall(it))
-        }
 
         adapter_small.setOnItemClickListener { item, view ->
             val intent = Intent(this, ItemDetail::class.java)
@@ -141,61 +113,73 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+    private fun fetchProductList()
+    {
+        val ref = FirebaseDatabase.getInstance().getReference("/products")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    val item_cart : ItemCart? = it.getValue(ItemCart::class.java)
+                    if(item_cart != null)
+                    {
+                        adapter_large.add(ItemLarge(item_cart))
+                        adapter_small.add(ItemSmall(item_cart))
+                    }
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("MainActivity",error.message.toString())
+            }
+        })
+    }
+
 
     private fun filterAdapterLarge() {
         val chips_group = binding.chipGroupMainActivity
         val ids = chips_group.checkedChipIds
-        val item_detail_list = listOf<ItemCart>(
-            ItemCart(
-                "1",
-                "Cotton Pant",
-                58,
-                "man",
-                R.drawable.pants,
-                listOf(R.drawable.pants_list, R.drawable.hiphop_list),
-                listOf("Trousers", "Winter Collection")
-            ),
-            ItemCart(
-                "2",
-                "White Shirt",
-                58,
-                "man",
-                R.drawable.whitetee,
-                listOf(R.drawable.whiteshirt_listt, R.drawable.hiphop_list),
-                listOf("Shirt")
-            ),
-            ItemCart(
-                "3",
-                "Hiphop Shirt",
-                58,
-                "man",
-                R.drawable.hiphop_tee,
-                listOf(R.drawable.hiphop_tee2, R.drawable.hiphop_tee),
-                listOf("Shirt")
-            ),
-        )
-
-        val adapter_large = GroupAdapter<GroupieViewHolder>()
-        binding.recyclerViewLargeMainActivity.adapter = adapter_large
-
         val titles = mutableListOf<String>()
+        val adapter_large = GroupAdapter<GroupieViewHolder>()
 
         ids.forEach { id ->
             titles.add(chips_group.findViewById<Chip>(id).text.toString())
         }
 
-
-        item_detail_list.forEach {
-            var count = 0
-            for (category in it.category) {
-                for (title in titles) {
-                    if (title == category) {
-                        count++
+        val ref = FirebaseDatabase.getInstance().getReference("/products")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val item_detail_list = mutableListOf<ItemCart>()
+                snapshot.children.forEach {
+                    val item_cart : ItemCart? = it.getValue(ItemCart::class.java)
+                    if(item_cart != null)
+                    {
+                        item_detail_list.add(item_cart)
                     }
                 }
+                item_detail_list.forEach {
+                    var count = 0
+                    for (category in it.category) {
+                        for (title in titles) {
+                            if (title == category) {
+                                count++
+                            }
+                        }
+                    }
+                    if(count == titles.size) adapter_large.add(ItemLarge(it))
+                }
             }
-            if(count == titles.size) adapter_large.add(ItemLarge(it))
-        }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d("MainActivity",error.message.toString())
+            }
+
+
+        })
+
+        binding.recyclerViewLargeMainActivity.adapter = adapter_large
+
+
+
+
+
 
     }
 }

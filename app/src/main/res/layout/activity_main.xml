@@ -46,6 +46,14 @@
                     android:src="@drawable/ic_outline_search_24" />
 
                 <ImageView
+                    android:id="@+id/user_icon_main_activity"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_baseline_supervised_user_circle_24"
+                    />
+
+                <ImageView
                     android:id="@+id/shopping_cart_imageView_mainActivity"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
