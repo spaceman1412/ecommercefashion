@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ecommercefashion">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,16 +12,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceFashion">
-        <meta-data android:name="com.google.android.gms.games.APP_ID"
+        <activity
+            android:name=".SalesProduct"
+            android:exported="false" />
+        <activity
+            android:name=".Coupons"
+            android:exported="false" />
+        <activity
+            android:name=".UserMgt"
+            android:exported="false" />
+        <activity
+            android:name=".ProductMgt"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
             android:value="875787058687" />
-        <meta-data android:name="com.google.android.gms.version"
+        <meta-data
+            android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".AdminActivity"
-            android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".CheckOutLarge"-->
-<!--            android:exported="true" />-->
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".CheckOutLarge" -->
+        <!-- android:exported="true" /> -->
         <activity
             android:name=".SeachActivity"
             android:exported="true" />

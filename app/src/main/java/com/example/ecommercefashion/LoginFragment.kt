@@ -76,6 +76,9 @@ class LoginFragment : Fragment() {
         val email: EditText = binding.emailEditTextLogin
         val passwd: EditText = binding.passwdEditTextLogin
 
+        email.setText("nhoxpiin2306@gmail.com")
+        passwd.setText("ngocthien")
+
         login_btn.setOnClickListener {
             if (checkAdmin(email.text.toString(), passwd.text.toString())) {
                 val intent = Intent(activity, AdminActivity::class.java)
@@ -102,7 +105,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkAdmin(email: String, password: String): Boolean {
-        val adminEmail: String = "nnt.itute@gmail.com"
+        val adminEmail: String = "nhoxpiin2306@gmail.com"
         val adminPassword: String = "ngocthien"
 
         return adminEmail == email && adminPassword == password
@@ -132,6 +135,8 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener{task ->
                     if(task.isSuccessful) {
                         var intent = Intent(activity, MainActivity::class.java)
+                        Toast.makeText(this.context, "Login with Google Successful", Toast.LENGTH_SHORT).show()
+                        val firebaseUser = firebaseAuth.currentUser
                         startActivity(intent)
                     }
                     else {

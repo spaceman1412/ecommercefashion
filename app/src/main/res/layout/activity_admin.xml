@@ -69,6 +69,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnUserMgt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/group"
@@ -98,6 +99,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnProductMgt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/clothes"
@@ -140,6 +142,7 @@
 
                     >
                     <ImageView
+                        android:id="@+id/btnSalesProduct"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/currency"
@@ -170,6 +173,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnCoupons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/loyalty"
@@ -210,6 +214,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnHelp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/info"
@@ -239,6 +244,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/testaccount"
@@ -279,6 +285,7 @@
                     android:gravity="center"
                     >
                     <ImageView
+                        android:id="@+id/btnLogout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:src="@drawable/logoutnew"
