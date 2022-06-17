@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         val USER_KEY = "USER_KEY"
         val adapter_large = GroupAdapter<GroupieViewHolder>()
         val adapter_small = GroupAdapter<GroupieViewHolder>()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

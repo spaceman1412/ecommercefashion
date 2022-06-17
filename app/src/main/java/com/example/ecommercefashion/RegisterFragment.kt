@@ -79,7 +79,10 @@ class RegisterFragment : Fragment() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         val email = binding.emailEditTextRegister
-        val user = User(uid.toString(),email.text.toString())
+
+        val number = binding.editNumberSignUp
+        val name = binding.nameEditTextRegister
+        val user = User(uid.toString(),email.text.toString(),number.text.toString(),"",name.text.toString())
         ref.setValue(user)
             .addOnCompleteListener {
                 Log.d(TAG,"Saved user to database")
