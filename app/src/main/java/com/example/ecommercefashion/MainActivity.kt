@@ -3,6 +3,7 @@ package com.example.ecommercefashion
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
@@ -91,6 +92,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SeachActivity::class.java)
             startActivity(intent)
         }
+        binding.userIconMainActivity.setOnClickListener {
+            val intent = Intent(this,ProfileActivity::class.java)
+            startActivity(intent)
+        }
 
         adapter_large.setOnItemClickListener { item, view ->
             val intent = Intent(this, ItemDetail::class.java)
@@ -170,6 +175,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.recyclerViewLargeMainActivity.adapter = adapter_large
+
 
 
 
