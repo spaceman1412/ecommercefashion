@@ -48,4 +48,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Name:"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/name_editInfo_editText"
+        app:layout_constraintEnd_toStartOf="@+id/name_editInfo_editText"
+        app:layout_constraintTop_toTopOf="@+id/name_editInfo_editText" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Phone Number:"
+        android:layout_marginStart="2dp"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneNumer_editInfo_editText"
+        app:layout_constraintEnd_toStartOf="@+id/phoneNumer_editInfo_editText"
+        app:layout_constraintTop_toTopOf="@+id/phoneNumer_editInfo_editText" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Adress:"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/location_editInfo_editText"
+        app:layout_constraintEnd_toStartOf="@+id/location_editInfo_editText"
+        app:layout_constraintTop_toTopOf="@+id/location_editInfo_editText" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Information"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

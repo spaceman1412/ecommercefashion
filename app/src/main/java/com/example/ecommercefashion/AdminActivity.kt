@@ -20,34 +20,17 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnProductMgt.setOnClickListener {
-            val intent = Intent(this, ProductMgt::class.java)
-            startActivity(intent)
-        }
         binding.btnLogout.setOnClickListener {
             val intent = Intent(this, LoginSreen::class.java)
             startActivity(intent)
         }
-        binding.btnUserMgt.setOnClickListener {
-            val intent = Intent(this, UserMgt::class.java)
-            startActivity(intent)
-        }
-        binding.btnSalesProduct.setOnClickListener {
-            val intent = Intent(this, SalesProduct::class.java)
-            startActivity(intent)
-        }
-        binding.btnProfile.setOnClickListener {
-            val intent = Intent(this, ProductMgt::class.java)
-            startActivity(intent)
-        }
-        binding.btnHelp.setOnClickListener {
-            val intent = Intent(this, ProductMgt::class.java)
-            startActivity(intent)
-        }
+
         binding.btnCoupons.setOnClickListener {
-            val intent = Intent(this, Coupons::class.java)
+
+            val intent = Intent(this,CouponActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 }

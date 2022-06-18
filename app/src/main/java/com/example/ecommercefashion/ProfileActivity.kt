@@ -26,5 +26,10 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.changePasswordProfileActivityCardView.setOnClickListener {
+            val intent = Intent(this,ChangePasswordActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceFashion">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CouponsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SalesProduct"
             android:exported="false" />
         <activity
@@ -49,8 +55,6 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
-
-
         <activity
             android:name=".SeachActivity"
             android:exported="true" />

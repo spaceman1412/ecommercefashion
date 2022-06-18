@@ -3,9 +3,9 @@ package com.example.ecommercefashion
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class UserMgt : AppCompatActivity() {
+class ChangePasswordActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_mgt)
+        setContentView(R.layout.activity_change_password)
     }
 }
