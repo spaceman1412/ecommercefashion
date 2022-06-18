@@ -53,6 +53,7 @@ class EditInfoActivity : AppCompatActivity() {
                             Log.d(TAG, "onCreate: ${it}")
                         }
                 }
+                finish()
             }
         }
 

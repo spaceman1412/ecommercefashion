@@ -181,13 +181,10 @@ class ShoppingCartActivity : AppCompatActivity() {
                 coupon = data?.getParcelableExtra<Coupon>("key")
                 Log.d(TAG, "onActivityResult: ${coupon}")
                 if (coupon != null) {
-                    price = price - (price*(coupon!!.discount)/100)
+                    price = price - (price*(coupon!!.percentage)/100)
                 }
                 binding.priceTextViewActivityShoppingCart.text = "$${price}"
             }
         }
     }
 }
-
-
-

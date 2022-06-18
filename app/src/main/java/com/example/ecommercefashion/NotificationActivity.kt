@@ -37,7 +37,7 @@ class NotificationActivity : AppCompatActivity() {
 
         val recyclerView = binding.recyclerViewNotification
 
-        val coupon: Coupon = Coupon("1", 20, "29/09/1988", "EVENT 23-6")
+        val coupon: Coupon = Coupon("1", 20, "29/09/1988")
         val notification: Notification = Notification("1", "aaa", "aaa", coupon, "29/09/1988", "")
 
         listenNotification()
@@ -49,7 +49,8 @@ class NotificationActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("notifications")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach { 
+                adapter.clear()
+                snapshot.children.forEach {
                     val notification = it.getValue(Notification::class.java)
                     adapter.add(ItemNotification(notification!!))
                 }

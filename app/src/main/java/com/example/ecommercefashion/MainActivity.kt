@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
 //        val productList = mutableListOf<ItemCart>()
 
-//        val item_cart1 = ItemCart("1","Cotton Pant",52,"Male","https://www.fashionkart.com.np/public/uploads/all/dE8uXgN0WQtxhD1CVn6yxCUgLK2dJ09ZCXpictGT.jpg", listOf(R.drawable.pants,R.drawable.pants_list), listOf("Trousers"))
+        val item_cart1 = ItemCart("1","Short Pant",30,"Male","https://cf.shopee.vn/file/90fefcd7516fdef46138d9e7d07dfe47", listOf(R.drawable.shortpant,R.drawable.pantshort), listOf("Trousers"))
 //        val item_cart2 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
 //        val item_cart3 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
 

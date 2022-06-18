@@ -1,6 +1,7 @@
 package com.example.ecommercefashion
 
 import android.nfc.Tag
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityCheckOutBinding
@@ -23,6 +25,8 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.viewbinding.BindableItem
 import java.sql.Array
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.properties.Delegates
 
 class CheckOutActivity : AppCompatActivity() {
@@ -111,6 +115,7 @@ class CheckOutActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onDataChange(snapshot: DataSnapshot) {
                 val refGetKey = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
                 val key = refGetKey.key
@@ -125,7 +130,10 @@ class CheckOutActivity : AppCompatActivity() {
                 if(key != null) {
                     if(price != 0)
                     {
-                        val itemCheckout = ItemCheckout(key, coupon, price, product_list)
+                        val current = LocalDateTime.now()
+                        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+                        val formatted = current.format(formatter)
+                        val itemCheckout = ItemCheckout(key, coupon, price, product_list,formatted.toString())
                         refGetKey.setValue(itemCheckout)
                     }
 
@@ -166,10 +174,12 @@ class CheckOutItemList(layoutInflater: LayoutInflater,itemCheckout: ItemCheckout
             viewBinding.linearLayoutCheckOut.addView(child)
         }
         if(itemCheckOutItem.coupon != null) {
-            viewBinding.percentageItemCheckOutTextView.text = "-%${itemCheckOutItem.coupon?.discount.toString()}"
+            viewBinding.percentageItemCheckOutTextView.text = "-%${itemCheckOutItem.coupon?.percentage.toString()}"
         }else viewBinding.percentageItemCheckOutTextView.text = "-%0"
 
         viewBinding.priceItemCheckOutTextView.text = "$${itemCheckOutItem.price}"
+        viewBinding.orderItemCheckOutTextView.text = "Order ${itemCheckOutItem.dateTime}"
+
     }
 
     override fun getLayout(): Int {
