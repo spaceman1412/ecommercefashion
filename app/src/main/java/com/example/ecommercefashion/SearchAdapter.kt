@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.models.ItemCart
 import org.w3c.dom.Text
 
@@ -37,12 +38,13 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.text = item_detail_list[position].name
         holder.price.text = "$${item_detail_list[position].price}"
-        holder.image.setImageResource(item_detail_list[position].primaryImage)
+//        holder.image.setImageResource(item_detail_list[position].primaryImage)
         holder.layout.setOnClickListener {
             val intent = Intent(context,ItemDetail::class.java)
             intent.putExtra(MainActivity.USER_KEY,item_detail_list[position])
             context.startActivity(intent)
         }
+        Glide.with(context).load(item_detail_list[position].primaryImageUrl).into(holder.image)
     }
 
     override fun getItemCount(): Int {

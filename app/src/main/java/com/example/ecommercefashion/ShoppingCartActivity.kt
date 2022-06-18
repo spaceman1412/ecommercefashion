@@ -7,9 +7,11 @@ import android.provider.Settings
 import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ActivityShoppingCartBinding
 import com.example.ecommercefashion.databinding.ItemShoppingCartBinding
+import com.example.ecommercefashion.models.Coupon
 import com.example.ecommercefashion.models.ItemCart
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -32,6 +34,9 @@ class ShoppingCartActivity : AppCompatActivity() {
     companion object {
         val TAG = "ShoppingCart"
         var listShopItem: MutableList<ShopItem> = mutableListOf()
+        public final val REQUEST_CODE_COUPON = 1
+        var coupon: Coupon? = null
+
     }
 
 
@@ -62,10 +67,21 @@ class ShoppingCartActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
 
+        binding.applyCouponShoppingCartTextView.setOnClickListener {
+            val intent = Intent(this,CouponActivity::class.java)
 
+            startActivityForResult(intent, REQUEST_CODE_COUPON)
+        }
         binding.checkOutButtonShoppingCart.setOnClickListener {
             val intent = Intent(this, CheckOutActivity::class.java)
+            if(coupon != null)
+            {
+                intent.putExtra("coupon",coupon)
+            }
+            intent.putExtra("price",price)
+
             startActivity(intent)
+
         }
     }
 
@@ -114,7 +130,7 @@ class ShoppingCartActivity : AppCompatActivity() {
                     } else Log.e("ShoppingCart", "Item shop is null")
                 }
 
-
+                binding.priceTextViewActivityShoppingCart.text = "$${price}"
                 adapter.clear()
                 addToAdapter()
                 adapter.notifyDataSetChanged()
@@ -136,13 +152,14 @@ class ShoppingCartActivity : AppCompatActivity() {
         BindableItem<ItemShoppingCartBinding>() {
         override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
             viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
-            viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
+            viewBinding.sizeItemShoppingCartTextView.text = "Size ${shopItem.size}"
             viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
                 Log.e("ShoppingCart", "Delete Clicked")
                 val uid = FirebaseAuth.getInstance().uid
                 FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}")
                     .removeValue()
             }
+            Glide.with(viewBinding.root.context).load(shopItem.primaryImageUrl).into(viewBinding.primaryImageViewItemShoppingCart)
         }
 
         override fun getLayout(): Int {
@@ -151,6 +168,23 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         override fun initializeViewBinding(view: View): ItemShoppingCartBinding {
             return ItemShoppingCartBinding.bind(view)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_CODE_COUPON)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                coupon = data?.getParcelableExtra<Coupon>("key")
+                Log.d(TAG, "onActivityResult: ${coupon}")
+                if (coupon != null) {
+                    price = price - (price*(coupon!!.percentage)/100)
+                }
+                binding.priceTextViewActivityShoppingCart.text = "$${price}"
+            }
         }
     }
 }

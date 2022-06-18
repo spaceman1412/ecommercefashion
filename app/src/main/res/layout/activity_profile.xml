@@ -5,10 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ProfileActivity">
-
-
   <ImageView
       android:id="@+id/imageView2"
       android:layout_width="100dp"
@@ -65,6 +62,7 @@
       app:layout_constraintTop_toBottomOf="@+id/textView19">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/editInformation_profile_cardView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
@@ -76,16 +74,17 @@
         app:layout_constraintTop_toBottomOf="@id/textView19">
 
       <TextView
+          android:id="@+id/editInformation_profile_textView"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_gravity="center_vertical"
           android:layout_marginStart="16dp"
-          android:text="Payment Methods"
-
+          android:text="Edit Information"
           android:textColor="@color/black" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/notification_profile_cardView"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"

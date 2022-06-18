@@ -1,17 +1,18 @@
 package com.example.ecommercefashion
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
-class SliderAdapter(val images: List<Int>) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
+class SliderAdapter(val images: List<Int>, val context : Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val imgView : ImageView
-
         init {
             imgView = itemView.findViewById(R.id.imageView)
         }

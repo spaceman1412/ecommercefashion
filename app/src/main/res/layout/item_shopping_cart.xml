@@ -38,11 +38,11 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/size_itemShoppingCart_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Delivery 23th July" />
+            android:text="Size " />
     </LinearLayout>
 
     <ImageView

@@ -1,16 +1,14 @@
 package com.example.ecommercefashion
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ItemLargeMainactivityBinding
 import com.example.ecommercefashion.databinding.ItemSmallMainActivityBinding
@@ -29,10 +27,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     companion object {
+        val TAG = "MainActivity"
         val USER_KEY = "USER_KEY"
         val adapter_large = GroupAdapter<GroupieViewHolder>()
         val adapter_small = GroupAdapter<GroupieViewHolder>()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +39,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+//        val productList = mutableListOf<ItemCart>()
+
+//        val item_cart1 = ItemCart("1","Cotton Pant",52,"Male","https://www.fashionkart.com.np/public/uploads/all/dE8uXgN0WQtxhD1CVn6yxCUgLK2dJ09ZCXpictGT.jpg", listOf(R.drawable.pants,R.drawable.pants_list), listOf("Trousers"))
+//        val item_cart2 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+//        val item_cart3 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+
+//        productList.add(item_cart1)
+//        productList.add(item_cart)
+//        productList.add(item_cart)
+
+//        val ref = FirebaseDatabase.getInstance().getReference("products").push()
+//        item_cart1.id = ref.key
+//        ref.setValue(item_cart1)
+//            .addOnCompleteListener {
+//                Log.d(TAG,"Saved value to database ${ref.key}")
+//            }
+//            .addOnFailureListener {
+//                Log.d(TAG,it.message.toString())
+//            }
+
 
         val currentUser = FirebaseAuth.getInstance().currentUser
         Log.d("MainActivity", "The current user is ${currentUser?.uid.toString()}")
@@ -52,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.menuMainActivity.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this,CheckOutActivity::class.java)
+            startActivity(intent)
         }
 
         val icon: ImageView = binding.searchIconMainActivity
@@ -76,6 +97,8 @@ class MainActivity : AppCompatActivity() {
 
 
         val recyclerView_large: RecyclerView = binding.recyclerViewLargeMainActivity
+
+
 
         fetchProductList()
 
@@ -113,13 +136,25 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
+
+
+    private fun setUpProductDatabase( productList: MutableList<ItemCart>)
+    {
+
+    }
+
     private fun fetchProductList()
     {
+        Log.d(TAG, "fetchProductList: ")
         val ref = FirebaseDatabase.getInstance().getReference("/products")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                adapter_large.clear()
+                adapter_small.clear()
                 snapshot.children.forEach {
                     val item_cart : ItemCart? = it.getValue(ItemCart::class.java)
+                    Log.d(TAG, "onDataChange: ${it.toString()}")
                     if(item_cart != null)
                     {
                         adapter_large.add(ItemLarge(item_cart))
@@ -170,17 +205,14 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Log.d("MainActivity",error.message.toString())
             }
-
-
         })
-
+        adapter_large.setOnItemClickListener { item, view ->
+            val intent = Intent(this, ItemDetail::class.java)
+            val shopItem = item as ItemLarge
+            intent.putExtra(USER_KEY, shopItem.item_detail)
+            startActivity(intent)
+        }
         binding.recyclerViewLargeMainActivity.adapter = adapter_large
-
-
-
-
-
-
     }
 }
 
@@ -188,7 +220,8 @@ class ItemLarge(val item_detail: ItemCart) : BindableItem<ItemLargeMainactivityB
     override fun bind(viewBinding: ItemLargeMainactivityBinding, position: Int) {
         viewBinding.titleNameTextViewLargeItem.text = item_detail.name
         viewBinding.priceTextViewLargeItem.text = "$${item_detail.price}"
-        viewBinding.primaryImageImageViewLargeItem.setImageResource(item_detail.primaryImage)
+        val imageView = viewBinding.primaryImageImageViewLargeItem
+        Glide.with(viewBinding.root.context).load(item_detail.primaryImageUrl).into(imageView)
         viewBinding.sexTextViewLargeItem.text = "For ${item_detail.sex}"
     }
 
@@ -205,7 +238,9 @@ class ItemSmall(val item_detail: ItemCart) : BindableItem<ItemSmallMainActivityB
     override fun bind(viewBinding: ItemSmallMainActivityBinding, position: Int) {
         viewBinding.priceTextViewSmallItem.text = "$${item_detail.price}"
         viewBinding.titleNameTextViewSmallItem.text = item_detail.name
-        viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
+        val imageView = viewBinding.primaryImageImageViewSmallItem
+        Glide.with(viewBinding.root.context).load(item_detail.primaryImageUrl).into(imageView)
+//        viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
     }
 
     override fun getLayout(): Int {
