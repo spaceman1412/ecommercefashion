@@ -16,43 +16,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/percent_itemCoupon_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-5% "
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:text="-5% "
                 android:textColor="@color/white"
                 android:textSize="40sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#999966"
                 android:layout_marginTop="25dp"
+                android:background="#999966"
+
                 />
+
             <TextView
+                android:id="@+id/txtNameCoupons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="35dp"
-                android:textColor="@color/white"
-                android:textSize="19sp"
                 android:text="Apply to first purchase"
-                />
+                android:textColor="@color/white"
+                android:textSize="19sp" />
+
+
             <TextView
                 android:id="@+id/date_itemCoupon_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"
-                android:textSize="12sp"
                 android:text="Validate date"
-                />
+                android:textColor="@color/white"
+                android:textSize="12sp" />
         </LinearLayout>
 
 

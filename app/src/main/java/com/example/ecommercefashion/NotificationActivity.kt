@@ -37,7 +37,7 @@ class NotificationActivity : AppCompatActivity() {
 
         val recyclerView = binding.recyclerViewNotification
 
-        val coupon: Coupon = Coupon("1", 20, "29/09/1988")
+        val coupon: Coupon = Coupon("1", 20, "29/09/1988", "EVENT 23-6")
         val notification: Notification = Notification("1", "aaa", "aaa", coupon, "29/09/1988", "")
 
         listenNotification()

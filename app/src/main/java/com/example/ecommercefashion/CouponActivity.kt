@@ -21,6 +21,8 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.viewbinding.BindableItem
+import java.util.*
+import kotlin.random.Random.Default.nextInt
 
 class CouponActivity : AppCompatActivity() {
 
@@ -51,7 +53,8 @@ class CouponActivity : AppCompatActivity() {
     private fun listenCoupon()
     {
         val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("users/${uid}/couponList")
+
+        val ref = FirebaseDatabase.getInstance().getReference("/coupons")
         ref.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 adapter.clear()
@@ -71,8 +74,9 @@ class CouponActivity : AppCompatActivity() {
     class ItemCoupon(val coupon: Coupon, val context: Context) :
         BindableItem<ItemCouponBinding>() {
         override fun bind(viewBinding: ItemCouponBinding, position: Int) {
-            viewBinding.percentItemCouponTextView.text = "-${coupon.percentage}%"
-            viewBinding.dateItemCouponTextView.text = coupon.date
+            viewBinding.percentItemCouponTextView.text = "-${coupon.discount}%"
+            viewBinding.dateItemCouponTextView.text = coupon.endDate
+            viewBinding.txtNameCoupons.text = coupon.nameCoupons
             viewBinding.root.setOnClickListener {
                 val data  = Intent()
                 data.putExtra("key",coupon)

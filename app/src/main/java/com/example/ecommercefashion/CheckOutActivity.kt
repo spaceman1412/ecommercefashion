@@ -166,7 +166,7 @@ class CheckOutItemList(layoutInflater: LayoutInflater,itemCheckout: ItemCheckout
             viewBinding.linearLayoutCheckOut.addView(child)
         }
         if(itemCheckOutItem.coupon != null) {
-            viewBinding.percentageItemCheckOutTextView.text = "-%${itemCheckOutItem.coupon?.percentage.toString()}"
+            viewBinding.percentageItemCheckOutTextView.text = "-%${itemCheckOutItem.coupon?.discount.toString()}"
         }else viewBinding.percentageItemCheckOutTextView.text = "-%0"
 
         viewBinding.priceItemCheckOutTextView.text = "$${itemCheckOutItem.price}"
