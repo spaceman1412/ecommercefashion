@@ -19,14 +19,13 @@ class AdminActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         binding.btnLogout.setOnClickListener {
             val intent = Intent(this, LoginSreen::class.java)
             startActivity(intent)
         }
 
         binding.btnCoupons.setOnClickListener {
-
             val intent = Intent(this,CouponsActivity::class.java)
             startActivity(intent)
         }

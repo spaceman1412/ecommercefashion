@@ -10,34 +10,39 @@
         android:id="@+id/name_editInfo_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumer_editInfo_editText"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/phoneNumer_editInfo_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginEnd="30dp"
+
         android:inputType="textPersonName"
         android:text="Phone Number"
         app:layout_constraintBottom_toTopOf="@+id/location_editInfo_editText"
-        app:layout_constraintTop_toBottomOf="@+id/name_editInfo_editText"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_editInfo_editText" />
 
     <EditText
         android:id="@+id/location_editInfo_editText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:layout_marginEnd="30dp"
         android:inputType="textPersonName"
         android:text="Location"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumer_editInfo_editText"
-        tools:layout_editor_absoluteX="100dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumer_editInfo_editText" />
 
     <Button
         android:id="@+id/save_editInfo_button"
@@ -55,9 +60,10 @@
         android:layout_marginEnd="16dp"
         android:text="Name:"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/name_editInfo_editText"
         app:layout_constraintEnd_toStartOf="@+id/name_editInfo_editText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/name_editInfo_editText" />
 
     <TextView
@@ -66,11 +72,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="Phone Number:"
-        android:layout_marginStart="2dp"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/phoneNumer_editInfo_editText"
         app:layout_constraintEnd_toStartOf="@+id/phoneNumer_editInfo_editText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/phoneNumer_editInfo_editText" />
 
     <TextView
@@ -80,9 +86,10 @@
         android:layout_marginEnd="16dp"
         android:text="Adress:"
         android:textColor="@color/black"
-        android:textSize="12sp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/location_editInfo_editText"
         app:layout_constraintEnd_toStartOf="@+id/location_editInfo_editText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/location_editInfo_editText" />
 
     <TextView

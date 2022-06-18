@@ -19,13 +19,13 @@ class EditInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEditInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val uid = FirebaseAuth.getInstance().uid
 
         if (uid != null) {
             FirebaseDatabase.getInstance().getReference("users").child(uid).get().addOnSuccessListener {
                 val user = it.getValue(User::class.java)
-
                 binding.locationEditInfoEditText.setText(user?.location)
                 binding.phoneNumerEditInfoEditText.setText(user?.phoneNumber)
                 binding.nameEditInfoEditText.setText(user?.name)
@@ -60,9 +60,5 @@ class EditInfoActivity : AppCompatActivity() {
     }
 
 
-    private fun listenUserInfo()
-    {
-
-    }
 
 }
