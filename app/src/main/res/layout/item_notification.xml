@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/image_notificationItem_imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/title_notificationItem_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Notification Title"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/coupoun_notificationItem_button"
+        app:layout_constraintStart_toEndOf="@+id/image_notificationItem_imageView"
+        app:layout_constraintTop_toTopOf="@+id/image_notificationItem_imageView" />
+
+    <TextView
+        android:id="@+id/description_notificationItem_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="Notification Description"
+        app:layout_constraintBottom_toTopOf="@+id/dateTime_notificationItem_textView"
+        app:layout_constraintEnd_toStartOf="@+id/coupoun_notificationItem_button"
+        app:layout_constraintStart_toStartOf="@+id/title_notificationItem_textView"
+        app:layout_constraintTop_toBottomOf="@+id/title_notificationItem_textView" />
+
+    <TextView
+        android:id="@+id/dateTime_notificationItem_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Date time"
+        app:layout_constraintBottom_toBottomOf="@+id/image_notificationItem_imageView"
+        app:layout_constraintEnd_toEndOf="@+id/description_notificationItem_textView"
+        app:layout_constraintStart_toStartOf="@+id/description_notificationItem_textView" />
+
+    <Button
+        android:id="@+id/coupoun_notificationItem_button"
+        android:layout_width="80dp"
+        android:layout_height="0dp"
+        android:text="Coupoun"
+        app:layout_constraintBottom_toBottomOf="@+id/image_notificationItem_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

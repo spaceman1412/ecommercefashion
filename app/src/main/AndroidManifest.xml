@@ -38,6 +38,20 @@
         <!-- android:name=".CheckOutLarge" -->
         <!-- android:exported="true" /> -->
         <activity
+            android:name=".CouponActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+
+        <activity
             android:name=".SeachActivity"
             android:exported="true" />
         <activity

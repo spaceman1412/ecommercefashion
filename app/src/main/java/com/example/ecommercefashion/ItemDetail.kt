@@ -1,23 +1,18 @@
 package com.example.ecommercefashion
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
-import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.RadioButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecommercefashion.databinding.ActivityItemDetailBinding
-import com.example.ecommercefashion.databinding.ItemDetailBinding
 import com.example.ecommercefashion.models.ItemCart
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import me.relex.circleindicator.CircleIndicator
 import me.relex.circleindicator.CircleIndicator3
-import org.w3c.dom.Text
 
 class ItemDetail : AppCompatActivity() {
     private lateinit var binding: ActivityItemDetailBinding
@@ -41,12 +36,26 @@ class ItemDetail : AppCompatActivity() {
         val circleIndicator : CircleIndicator3 = binding.dotsContainer
         circleIndicator.setViewPager(pager2)
 
+
+
         val add_to_cart : LinearLayout = binding.addToCartBtnItemDetail
         val uid = FirebaseAuth.getInstance().uid
         add_to_cart.setOnClickListener {
             Log.e("ItemDetail","Clicked add to cart")
             val ref = FirebaseDatabase.getInstance().getReference("cart/$uid").push()
             shopItem?.id = ref.key
+
+            val radioGroup = binding.sizeItemDetailRadioGroup
+
+            val selectedRadioButton : Int = radioGroup.checkedRadioButtonId
+
+            if(selectedRadioButton != -1)
+            {
+                val selectedRadioButton : RadioButton = findViewById(selectedRadioButton)
+                val selectedRbText = selectedRadioButton.text.toString()
+                shopItem?.size = selectedRbText
+            }
+
             ref.setValue(shopItem)
                 .addOnCompleteListener {
                     Log.d("ItemDetail","Saved value to database ${ref.key}")

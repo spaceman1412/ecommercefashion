@@ -70,6 +70,7 @@
                 android:textSize="20sp" />
 
             <RadioGroup
+                android:id="@+id/size_itemDetail_radioGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

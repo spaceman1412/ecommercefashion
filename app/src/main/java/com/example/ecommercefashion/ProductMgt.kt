@@ -25,16 +25,21 @@ class ProductMgt : AppCompatActivity() {
         binding = ActivityProductMgtBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val database = FirebaseDatabase.getInstance().reference
-        getListProduct()
+        //getListProduct()
         val btnCreateProduct: Button = binding.btnCreate
         btnCreateProduct.setOnClickListener {
             val uid = FirebaseAuth.getInstance().uid
-            val ref = FirebaseDatabase.getInstance().getReference("/products/$uid")
+            val rnds = (100000..999999).random().toString()
+            val id = "Product" + rnds
+            val ref = FirebaseDatabase.getInstance().getReference("/products/$id")
+
+
             var name = binding.txtProductName.text.toString()
             var price = binding.txtProductPrice.text.toString().toInt()
             var url = binding.txtProductImageURL.text.toString()
             var checkMale = binding.checkBoxMale.isChecked
             var checkFemale = binding.checkBoxFemale.isChecked
+
             var sex = ""
             if(checkMale) {
                 sex = "Male"
@@ -49,12 +54,14 @@ class ProductMgt : AppCompatActivity() {
                 .addOnFailureListener {
                     Log.d(RegisterFragment.TAG,it.message.toString())
                 }
+
+
         }
 
     }
     private fun getListProduct() {
         val uid = FirebaseAuth.getInstance().uid
-        val ref = FirebaseDatabase.getInstance().getReference("/products/$uid")
+        val ref = FirebaseDatabase.getInstance().getReference("/products")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {

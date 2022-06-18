@@ -121,13 +121,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="24dp"
             android:text="Create new coupons for customers!"
             android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField" />
 
@@ -145,8 +145,23 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view"
+            app:layout_constraintVertical_bias="0.094" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnListOfCoupons"
+            android:layout_width="168dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="139dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="178dp"
+            android:text="List Coupons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.246"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCreate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

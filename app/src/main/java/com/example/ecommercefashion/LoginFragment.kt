@@ -25,7 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import java.lang.Exception
 
 class LoginFragment : Fragment() {
-
+    // Ngoc Thien - 19110148: Update code 16/6/2022
     companion object {
         val TAG = "Login"
         private const val RC_SIGN_IN = 100
@@ -48,13 +48,14 @@ class LoginFragment : Fragment() {
 
         val register_btn = binding.signUpText
 
+        // go to register screen
         register_btn.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_loginFragment_to_registerFragment)
         }
         // configure the Google SignIn
-        val googleSignInOptions =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail() // we only need email from google account
                 .build()
@@ -76,23 +77,29 @@ class LoginFragment : Fragment() {
         val login_btn: Button = binding.loginButtonLogin
         val email: EditText = binding.emailEditTextLogin
         val passwd: EditText = binding.passwdEditTextLogin
+
         val forgot: TextView = binding.txtForgotPassword
 
         email.setText("nnt.itute@gmail.com")
         passwd.setText("ngocthien")
+
 
         forgot.setOnClickListener{
             var intent = Intent(activity, ForgotPasswordFragment::class.java)
             startActivity(intent)
         }
         login_btn.setOnClickListener {
+
             FirebaseAuth.getInstance().signInWithEmailAndPassword(
                 email.text.toString(), passwd.text.toString()
             )
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
+
                     val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                     Log.d(TAG, "Login successfully ${currentUser.toString()}")
+                    // Ngoc Thien edit
+                    // Check admin role, go into admin screen
                     if(checkAdmin(email.text.toString(), passwd.text.toString())) {
                         var intent = Intent(activity, AdminActivity::class.java)
                         startActivity(intent)
@@ -107,13 +114,16 @@ class LoginFragment : Fragment() {
                     Log.d(TAG, it.message.toString())
                 }
 
+
         }
         return binding.root
     }
 
     private fun checkAdmin(email: String, password: String): Boolean {
+
         val adminEmail: String = "nnt.itute@gmail.com"
         val adminPassword: String = "ngocthien"
+
 
         return adminEmail == email && adminPassword == password
     }
@@ -150,7 +160,6 @@ class LoginFragment : Fragment() {
                         Toast.makeText(this.context, task.exception?.message, Toast.LENGTH_SHORT).show()
                     }
                 }
-
 
         }
     }

@@ -14,7 +14,7 @@
         <ImageView
             android:id="@+id/signup_image_view"
             android:layout_width="0dp"
-            android:layout_height="280dp"
+            android:layout_height="200dp"
             android:contentDescription="@string/bg_img_desc"
             android:scaleType="fitStart"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,7 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="128dp"
             android:layout_marginEnd="24dp"
             android:text="Create new product for customers!"
             android:textAlignment="center"
@@ -133,8 +133,10 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view"
+            app:layout_constraintVertical_bias="1.0" />
 
         <CheckBox
             android:id="@+id/checkBoxMale"

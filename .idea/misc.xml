@@ -68,14 +68,21 @@
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/drawable/ic_baseline_people_alt_100.xml" value="0.1455" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/drawable/ic_baseline_profile_100.xml" value="0.1455" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_admin.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_coupon.xml" value="0.25" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_coupons.xml" value="0.264" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_edit_info.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_item_detail.xml" value="0.25" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_login_sreen.xml" value="0.2" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_notification.xml" value="0.25" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_product_mgt.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_sales_product.xml" value="0.2359375" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/activity_user_mgt.xml" value="0.25" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/fragment_forgot_password.xml" value="0.10989583333333333" />
         <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/fragment_login.xml" value="0.2" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/item_check_out.xml" value="0.25" />
+        <entry key="..\:/Users/hp/Downloads/HK2_21-22/Mobile Programming/Project/ecommercefashion/app/src/main/res/layout/item_coupon.xml" value="0.25" />
       </map>
     </option>
   </component>
