@@ -34,6 +34,7 @@ class ShoppingCartActivity : AppCompatActivity() {
         val TAG = "ShoppingCart"
         var listShopItem: MutableList<ShopItem> = mutableListOf()
         public final val REQUEST_CODE_COUPON = 1
+        var coupon: Coupon? = null
 
     }
 
@@ -72,7 +73,14 @@ class ShoppingCartActivity : AppCompatActivity() {
         }
         binding.checkOutButtonShoppingCart.setOnClickListener {
             val intent = Intent(this, CheckOutActivity::class.java)
+            if(coupon != null)
+            {
+                intent.putExtra("coupon",coupon)
+            }
+            intent.putExtra("price",price)
+
             startActivity(intent)
+
         }
     }
 
@@ -169,10 +177,10 @@ class ShoppingCartActivity : AppCompatActivity() {
         {
             if(resultCode == RESULT_OK)
             {
-                val coupon : Coupon? =  data?.getParcelableExtra<Coupon>("key")
+                coupon = data?.getParcelableExtra<Coupon>("key")
                 Log.d(TAG, "onActivityResult: ${coupon}")
                 if (coupon != null) {
-                    price = price - (price*(coupon.percentage)/100)
+                    price = price - (price*(coupon!!.percentage)/100)
                 }
                 binding.priceTextViewActivityShoppingCart.text = "$${price}"
             }

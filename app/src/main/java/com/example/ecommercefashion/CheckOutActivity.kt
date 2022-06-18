@@ -12,7 +12,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecommercefashion.databinding.ActivityCheckOutBinding
 import com.example.ecommercefashion.databinding.ItemCheckOutListBinding
+import com.example.ecommercefashion.models.Coupon
 import com.example.ecommercefashion.models.ItemCart
+import com.example.ecommercefashion.models.ItemCheckout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.xwray.groupie.GroupAdapter
@@ -20,12 +22,18 @@ import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
 import com.xwray.groupie.viewbinding.BindableItem
 import java.sql.Array
+import kotlin.properties.Delegates
 
 class CheckOutActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheckOutBinding
+
+
+
     companion object{
         val TAG = "CheckOutActivity"
+        var price = 0
+        var coupon : Coupon? = null
     }
 
     val adapter = GroupAdapter<GroupieViewHolder>()
@@ -38,11 +46,15 @@ class CheckOutActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        coupon  = intent.getParcelableExtra<Coupon>("coupon")
+
+        price = intent.getIntExtra("price",0)
+
         listenCartDatabase()
 
         fetchCheckOutDatabase()
-
-        fetchCheckOutList()
+//
+//        fetchCheckOutList()
         val recyclerView : RecyclerView = binding.recyclerViewCheckOut
         recyclerView.adapter = adapter
 //        adapter.add(CheckOutItemList())
@@ -61,18 +73,18 @@ class CheckOutActivity : AppCompatActivity() {
 
     var listOfListItemCart  = HashMap<String,ArrayList<ItemCart?>>()
 
-    private fun fetchCheckOutList(){
-        //The function fetch not done yet so can't have data
-        Log.d("CheckOutActivity","Called fetch function")
-
-        listOfListItemCart.values.forEach {
-            Log.d(TAG,it.toString())
-            adapter.add(CheckOutItemList(layoutInflater,it))
-//            val linearLayout : LinearLayout = binding.linearLayoutCheckOut
-//            val child : View = layoutInflater.inflate(R.layout.item_check_out,null)
-//            linearLayout.addView(child)
-        }
-    }
+//    private fun fetchCheckOutList(){
+//        //The function fetch not done yet so can't have data
+//        Log.d("CheckOutActivity","Called fetch function")
+//
+//        listOfListItemCart.values.forEach {
+//            Log.d(TAG,it.toString())
+//            adapter.add(CheckOutItemList(layoutInflater,it))
+////            val linearLayout : LinearLayout = binding.linearLayoutCheckOut
+////            val child : View = layoutInflater.inflate(R.layout.item_check_out,null)
+////            linearLayout.addView(child)
+//        }
+//    }
 
     private fun fetchCheckOutDatabase(){
         val uid = FirebaseAuth.getInstance().uid
@@ -80,15 +92,13 @@ class CheckOutActivity : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-                    val listItem : ArrayList<ItemCart?> = ArrayList()
-                    it.children.forEach {
-                        val item : ItemCart? = it.getValue(ItemCart::class.java)
-                        Log.d(TAG,item.toString())
-                        listItem.add(item)
+                    val itemCheckout = it.getValue(ItemCheckout::class.java)
+                    if(itemCheckout != null)
+                    {
+                        adapter.add(CheckOutItemList(layoutInflater,itemCheckout))
                     }
-                    listOfListItemCart[it.key!!] = listItem
                 }
-                fetchCheckOutList()
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -101,19 +111,24 @@ class CheckOutActivity : AppCompatActivity() {
 
     private fun listenCartDatabase(){
         val uid = FirebaseAuth.getInstance().uid
-
         val ref = FirebaseDatabase.getInstance().getReference("/cart/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val refGetKey = FirebaseDatabase.getInstance().getReference("/check-out/$uid").push()
                 val key = refGetKey.key
+                val product_list = mutableListOf<ItemCart>()
                 snapshot.children.forEach {
                     //TODO: Edit here save to list of itemcart not push to a node
                     val shopItem = it.getValue(ItemCart::class.java)
                     if (shopItem != null) {
-                        saveToCheckOutDatabase(shopItem,key)
+                        product_list.add(shopItem)
                     }
                 }
+                if(key != null) {
+                    val itemCheckout = ItemCheckout(key, coupon, price, product_list)
+                    refGetKey.setValue(itemCheckout)
+                }
+
             }
             override fun onCancelled(error: DatabaseError) {
                 Log.d(ShoppingCartActivity.TAG, "Failed to adapter")
@@ -135,9 +150,10 @@ class CheckOutActivity : AppCompatActivity() {
     }
 }
 
-class CheckOutItemList(layoutInflater: LayoutInflater,listItem : ArrayList<ItemCart?>) : BindableItem<ItemCheckOutListBinding>(){
+class CheckOutItemList(layoutInflater: LayoutInflater,itemCheckout: ItemCheckout) : BindableItem<ItemCheckOutListBinding>(){
     val layoutInflater : LayoutInflater = layoutInflater
-    val listOfItemCart : ArrayList<ItemCart?> = listItem
+    val listOfItemCart  = itemCheckout.product_list
+    val itemCheckOutItem = itemCheckout
     override fun bind(viewBinding: ItemCheckOutListBinding, position: Int) {
         listOfItemCart.forEach {
             val child : View = layoutInflater.inflate(R.layout.item_check_out,null)
@@ -147,6 +163,11 @@ class CheckOutItemList(layoutInflater: LayoutInflater,listItem : ArrayList<ItemC
 //                it!!.primaryImage)
             viewBinding.linearLayoutCheckOut.addView(child)
         }
+        if(itemCheckOutItem.coupon != null) {
+            viewBinding.percentageItemCheckOutTextView.text = "-%${itemCheckOutItem.coupon?.percentage.toString()}"
+        }else viewBinding.percentageItemCheckOutTextView.text = "-%0"
+
+        viewBinding.priceItemCheckOutTextView.text = "$${itemCheckOutItem.price}"
     }
 
     override fun getLayout(): Int {
