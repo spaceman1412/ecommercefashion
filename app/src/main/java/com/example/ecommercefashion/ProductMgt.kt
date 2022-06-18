@@ -3,16 +3,12 @@ package com.example.ecommercefashion
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecommercefashion.databinding.ActivityProductMgtBinding
-import com.example.ecommercefashion.models.ItemCart
-import com.example.ecommercefashion.models.Product
+import com.example.ecommercefashion.models.ProductE
 import com.example.ecommercefashion.models.ProductDTO
-import com.example.ecommercefashion.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.lang.StringBuilder
 
 
 class ProductMgt : AppCompatActivity() {
@@ -54,9 +50,9 @@ class ProductMgt : AppCompatActivity() {
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
-                    val listProduct : ArrayList<Product?> = ArrayList()
+                    val listProduct : ArrayList<ProductE?> = ArrayList()
                     it.children.forEach {
-                        val item : Product? = it.getValue(Product::class.java)
+                        val item : ProductE? = it.getValue(ProductE::class.java)
                         Log.d("123456",item.toString())
                         listProduct.add(item)
                     }

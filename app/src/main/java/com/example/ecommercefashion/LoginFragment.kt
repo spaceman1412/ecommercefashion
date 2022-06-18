@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.ecommercefashion.databinding.FragmentLoginBinding
@@ -75,10 +76,15 @@ class LoginFragment : Fragment() {
         val login_btn: Button = binding.loginButtonLogin
         val email: EditText = binding.emailEditTextLogin
         val passwd: EditText = binding.passwdEditTextLogin
+        val forgot: TextView = binding.txtForgotPassword
 
         email.setText("nhoxpiin2306@gmail.com")
         passwd.setText("ngocthien")
 
+        forgot.setOnClickListener{
+            var intent = Intent(activity, ForgotPasswordFragment::class.java)
+            startActivity(intent)
+        }
         login_btn.setOnClickListener {
             if (checkAdmin(email.text.toString(), passwd.text.toString())) {
                 val intent = Intent(activity, AdminActivity::class.java)
