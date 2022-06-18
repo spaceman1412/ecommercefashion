@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
-    android:layout_height="match_parent"
-    tools:context=".ProductMgt">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +19,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/clothes" />
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            app:srcCompat="@drawable/user_image" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameOutlinedTextField"
@@ -29,13 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:hint="PRODUCT NAME"
+            android:hint="FULL NAME"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signup_image_view"
             app:placeholderText=""
+            android:layout_marginTop="20dp"
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -45,6 +47,7 @@
                 android:inputType="textPersonName"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
+
                 tools:ignore="TouchTargetSizeCheck" />
 
 
@@ -58,7 +61,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:hint="PRICE"
+            android:hint="EMAIL"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +88,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:hint="IMAGE URL"
+            android:hint="CONTACT NO"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -111,7 +114,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:hint="SIZE"
+            android:hint="LOCATION"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -136,9 +139,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="24dp"
-            android:text="Create new product for customers!"
+            android:text="Edit information for customers!"
             android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -148,21 +151,21 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCreate"
-            android:layout_width="167dp"
-            android:layout_height="wrap_content"
+            android:layout_width="358dp"
+            android:layout_height="49dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:background="@color/md_green_500"
+            android:background="@color/md_blue_500"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="Create Product"
+            android:text="Update"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintHorizontal_bias="0.485"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view"
             app:layout_constraintVertical_bias="0.0" />
@@ -186,19 +189,6 @@
             android:text="Famale"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button2"
-            android:layout_width="167dp"
-            android:layout_height="49dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:textAllCaps="false"
-            android:text="Open List Product"
-            android:background="@color/md_light_blue_400"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
