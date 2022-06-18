@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
     android:layout_height="match_parent"
-    tools:context=".CouponsActivity"
+    tools:context=".NotificationMgtActivity"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,13 +15,13 @@
         <ImageView
             android:id="@+id/signup_image_view"
             android:layout_width="0dp"
-            android:layout_height="280dp"
+            android:layout_height="100dp"
             android:contentDescription="@string/bg_img_desc"
-            android:scaleType="fitStart"
+            android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/coupons" />
+            app:srcCompat="@drawable/notification_banner" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameOutlinedTextField"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:hint="COUPONS NAME"
+            android:hint="NOTIFICATION NAME"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,7 +40,7 @@
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtCouponsName"
+                android:id="@+id/txtNotificationName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -59,7 +59,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="24dp"
-            android:hint="DISCOUNT %"
+            android:hint="DESCRIPTION"
             app:expandedHintEnabled="false"
             app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,10 +69,10 @@
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txtDiscount"
+                android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="textPersonName"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -105,20 +105,44 @@
                 tools:ignore="TouchTargetSizeCheck" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailOutlinedTextFieldZ"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:hint="IMAGE URL"
+            app:expandedHintEnabled="false"
+            app:hintTextAppearance="@style/TextAppearance.MyTheme.Subtitle2"
+            app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:placeholderText=""
+            app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtImageUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textWebEmailAddress"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/pickCoupon_notificationMgt_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
             android:layout_marginEnd="24dp"
-            android:text="Create new coupons for customers!"
+            android:text="Pick Coupon"
+            android:textColor="@color/md_blue_A700"
             android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField" />
+            app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextFieldZ" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCreate"
@@ -129,7 +153,7 @@
             android:layout_weight="1"
             android:paddingStart="32dp"
             android:paddingEnd="32dp"
-            android:text="Create Coupons"
+            android:text="Create Notification"
             android:textAllCaps="false"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -140,13 +164,13 @@
             app:layout_constraintVertical_bias="0.094" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnListOfCoupons"
+            android:id="@+id/btnListOfNotifications"
             android:layout_width="168dp"
             android:layout_height="48dp"
             android:layout_marginStart="139dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="178dp"
-            android:text="List Coupons"
+            android:text="List Notification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.246"
             app:layout_constraintStart_toStartOf="parent"

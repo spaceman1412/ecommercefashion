@@ -39,17 +39,40 @@ class CouponActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val recyclerView = binding.couponCouponActivityRecyclerView
-        listenCoupon()
+        val uid : String? = FirebaseAuth.getInstance().uid
+        Log.d(TAG, "onCreate: ${uid}")
+        if(uid == null) listenCouponAdmin()
+        else listenCouponUser()
+
         recyclerView.adapter = adapter
 
 
     }
-    private fun test()
+
+
+    private fun listenCouponAdmin()
     {
-        finish()
+
+        val ref = FirebaseDatabase.getInstance().getReference("coupons")
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                adapter.clear()
+                snapshot.children.forEach {
+                    val coupon = it.getValue(Coupon::class.java)
+                    if(coupon != null) {
+                        adapter.add(ItemCoupon(coupon, this@CouponActivity))
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
-    private fun listenCoupon()
+    private fun listenCouponUser()
     {
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("users/${uid}/couponList")
@@ -58,7 +81,9 @@ class CouponActivity : AppCompatActivity() {
                 adapter.clear()
                 snapshot.children.forEach {
                     val coupon = it.getValue(Coupon::class.java)
-                    adapter.add(ItemCoupon(coupon!!,this@CouponActivity))
+                    if(coupon != null) {
+                        adapter.add(ItemCoupon(coupon, this@CouponActivity))
+                    }
                 }
             }
 

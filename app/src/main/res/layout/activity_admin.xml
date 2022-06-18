@@ -69,15 +69,15 @@
                     android:gravity="center"
                     >
                     <ImageView
-                        android:id="@+id/btnUserMgt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/group"
+                        android:id="@+id/btnNotification"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/notification"
                         />
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="  User Mgt  "
+                        android:text="  Notification  "
                         android:textAlignment="center"
                         />
                 </LinearLayout>

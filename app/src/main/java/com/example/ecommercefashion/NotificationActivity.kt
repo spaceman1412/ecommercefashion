@@ -35,7 +35,7 @@ class NotificationActivity : AppCompatActivity() {
 
         binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        supportActionBar?.hide()
         val recyclerView = binding.recyclerViewNotification
 
         val coupon: Coupon = Coupon("2", 10, "19/06/2022")

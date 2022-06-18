@@ -90,6 +90,7 @@ class LoginFragment : Fragment() {
         login_btn.setOnClickListener {
             if(checkAdmin(email.text.toString(), passwd.text.toString())) {
                 var intent = Intent(activity, AdminActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
             } else {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(
@@ -103,6 +104,7 @@ class LoginFragment : Fragment() {
                         // Check admin role, go into admin screen
 
                         var intent = Intent(activity, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     }
                     .addOnFailureListener {

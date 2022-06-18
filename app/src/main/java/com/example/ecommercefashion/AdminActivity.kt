@@ -27,9 +27,14 @@ class AdminActivity : AppCompatActivity() {
 
         binding.btnCoupons.setOnClickListener {
 
-            val intent = Intent(this,CouponActivity::class.java)
+            val intent = Intent(this,CouponsActivity::class.java)
             startActivity(intent)
         }
+        binding.btnNotification.setOnClickListener {
+            val intent = Intent(this,NotificationMgtActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
     }

@@ -32,6 +32,13 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.logOutProfileActivitCardView.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this, LoginSreen::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
         binding.changePasswordProfileActivityCardView.setOnClickListener {
             val intent = Intent(this,ChangePasswordActivity::class.java)
             startActivity(intent)
