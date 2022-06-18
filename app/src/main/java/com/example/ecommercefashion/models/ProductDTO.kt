@@ -1,15 +1,17 @@
 package com.example.ecommercefashion.models
 
 class ProductDTO {
+    var id = ""
     var name = ""
     var price = 0
-    var url = ""
+    var primaryImage = ""
     var sex = ""
 
-    constructor(name: String, price: Int, url: String, sex: String) {
+    constructor(id: String,name: String, price: Int, primaryImage: String, sex: String) {
+        this.id = id
         this.name = name
         this.price = price
-        this.url = url
+        this.primaryImage = primaryImage
         this.sex = sex
     }
 }

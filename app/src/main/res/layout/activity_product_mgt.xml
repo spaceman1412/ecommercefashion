@@ -22,30 +22,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/clothes" />
 
-        <TextView
-            android:id="@+id/signup_welcome_hello_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="64dp"
-            android:text="Main"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            app:layout_constraintStart_toStartOf="@id/signup_image_view"
-            app:layout_constraintTop_toTopOf="@id/signup_image_view" />
-
-        <TextView
-            android:id="@+id/signup_welcome_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Products"
-            android:textAppearance="@style/TextAppearance.MyTheme.Headline3"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/signup_image_view"
-            app:layout_constraintTop_toBottomOf="@+id/signup_welcome_hello_tv" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameOutlinedTextField"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -63,7 +39,7 @@
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_name_edit_text"
+                android:id="@+id/txtProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
@@ -92,7 +68,7 @@
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_mobile_edit_text"
+                android:id="@+id/txtProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
@@ -119,7 +95,7 @@
             app:placeholderTextAppearance="@style/TextAppearance.MyTheme.Body2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/signup_email_edit_text"
+                android:id="@+id/txtProductImageURL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textWebEmailAddress"
@@ -133,6 +109,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:text="Create new product for customers!"
             android:textAlignment="center"
@@ -140,10 +117,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="597dp" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxFemale" />
 
-        <Button
-            android:id="@+id/signup_signup_btn"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCreate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -158,6 +135,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signup_login_text_view" />
+
+        <CheckBox
+            android:id="@+id/checkBoxMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:text="Male"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField" />
+
+        <CheckBox
+            android:id="@+id/checkBoxFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="216dp"
+            android:text="Famale"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailOutlinedTextField" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

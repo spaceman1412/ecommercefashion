@@ -30,11 +30,19 @@ class ProductMgt : AppCompatActivity() {
         btnCreateProduct.setOnClickListener {
             val uid = FirebaseAuth.getInstance().uid
             val ref = FirebaseDatabase.getInstance().getReference("/products/$uid")
-            var name = binding.editTextTextPersonName.text.toString()
-            var price = binding.editTextTextPersonName2.text.toString().toInt()
-            var url = binding.editTextTextPersonName3.text.toString()
-            var sex = binding.editTextTextPersonName4.text.toString()
-            ref.setValue(ProductDTO(name, price, url, sex))
+            var name = binding.txtProductName.text.toString()
+            var price = binding.txtProductPrice.text.toString().toInt()
+            var url = binding.txtProductImageURL.text.toString()
+            var checkMale = binding.checkBoxMale.isChecked
+            var checkFemale = binding.checkBoxFemale.isChecked
+            var sex = ""
+            if(checkMale) {
+                sex = "Male"
+            }
+            else if(checkFemale) {
+                sex = "Female"
+            }
+            ref.setValue(ProductDTO(uid.toString(),name, price, url, sex))
                 .addOnCompleteListener {
                     Log.d(RegisterFragment.TAG,"Saved user to database")
                 }
