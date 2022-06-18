@@ -25,7 +25,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import java.lang.Exception
 
 class LoginFragment : Fragment() {
-    // Ngoc Thien - 19110148: Update code 16/6/2022
+
     companion object {
         val TAG = "Login"
         private const val RC_SIGN_IN = 100
