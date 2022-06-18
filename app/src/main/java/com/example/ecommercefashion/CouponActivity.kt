@@ -3,6 +3,7 @@ package com.example.ecommercefashion
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,7 +34,7 @@ class CouponActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        supportActionBar?.hide()
         binding = ActivityCouponBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -71,6 +72,15 @@ class CouponActivity : AppCompatActivity() {
     class ItemCoupon(val coupon: Coupon, val context: Context) :
         BindableItem<ItemCouponBinding>() {
         override fun bind(viewBinding: ItemCouponBinding, position: Int) {
+            var color = ""
+            when(coupon.percentage)
+            {
+                10 -> color = "#ff4da6"
+                15 -> color = "#33cc33"
+                20 -> color = "#ff1a1a"
+            }
+            val colorInt  = Color.parseColor(color)
+            viewBinding.couponItemCouponCardView.setCardBackgroundColor(colorInt)
             viewBinding.percentItemCouponTextView.text = "-${coupon.percentage}%"
             viewBinding.dateItemCouponTextView.text = coupon.date
             viewBinding.root.setOnClickListener {

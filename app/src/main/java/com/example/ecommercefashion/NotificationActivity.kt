@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityNotificationBinding
 import com.example.ecommercefashion.databinding.ItemLargeMainactivityBinding
 import com.example.ecommercefashion.databinding.ItemNotificationBinding
@@ -37,9 +38,9 @@ class NotificationActivity : AppCompatActivity() {
 
         val recyclerView = binding.recyclerViewNotification
 
-        val coupon: Coupon = Coupon("1", 20, "29/09/1988")
-        val notification: Notification = Notification("1", "aaa", "aaa", coupon, "29/09/1988", "")
-
+        val coupon: Coupon = Coupon("2", 10, "19/06/2022")
+        val notification: Notification = Notification("2", "Shop Birthday", "Give coupon with 10% sale for all customer", coupon, "19/06/2022", "https://tbtvn.org/wp-content/uploads/2020/05/coupon-code.png")
+//        setUpNotification(notification)
         listenNotification()
         recyclerView.adapter = adapter
     }
@@ -96,6 +97,10 @@ class NotificationActivity : AppCompatActivity() {
             viewBinding.titleNotificationItemTextView.setText(notification.title)
             viewBinding.descriptionNotificationItemTextView.setText(notification.description)
             viewBinding.dateTimeNotificationItemTextView.setText(notification.date)
+
+
+            val imageView = viewBinding.imageNotificationItemImageView
+            Glide.with(viewBinding.root.context).load(notification.imageUrl).into(imageView)
             viewBinding.coupounNotificationItemButton.setOnClickListener {
                 val uid = FirebaseAuth.getInstance().uid
                 if (uid != null) {
@@ -112,7 +117,6 @@ class NotificationActivity : AppCompatActivity() {
                         override fun onCancelled(error: DatabaseError) {
 
                         }
-
                     })
                 }
             }
