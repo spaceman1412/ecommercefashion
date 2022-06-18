@@ -1,5 +1,8 @@
 package com.example.ecommercefashion
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -37,6 +40,12 @@ class CouponActivity : AppCompatActivity() {
         val recyclerView = binding.couponCouponActivityRecyclerView
         listenCoupon()
         recyclerView.adapter = adapter
+
+
+    }
+    private fun test()
+    {
+        finish()
     }
 
     private fun listenCoupon()
@@ -48,7 +57,7 @@ class CouponActivity : AppCompatActivity() {
                 adapter.clear()
                 snapshot.children.forEach {
                     val coupon = it.getValue(Coupon::class.java)
-                    adapter.add(ItemCoupon(coupon!!))
+                    adapter.add(ItemCoupon(coupon!!,this@CouponActivity))
                 }
             }
 
@@ -59,11 +68,17 @@ class CouponActivity : AppCompatActivity() {
         })
     }
 
-    class ItemCoupon(val coupon: Coupon) :
+    class ItemCoupon(val coupon: Coupon, val context: Context) :
         BindableItem<ItemCouponBinding>() {
         override fun bind(viewBinding: ItemCouponBinding, position: Int) {
             viewBinding.percentItemCouponTextView.text = "-${coupon.percentage}%"
             viewBinding.dateItemCouponTextView.text = coupon.date
+            viewBinding.root.setOnClickListener {
+                val data  = Intent()
+                data.putExtra("key",coupon)
+                ((context) as Activity).setResult(RESULT_OK,data)
+                ((context) as Activity).finish()
+            }
         }
 
         override fun getLayout(): Int {

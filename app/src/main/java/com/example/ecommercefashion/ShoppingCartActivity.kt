@@ -10,6 +10,7 @@ import android.view.View
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ActivityShoppingCartBinding
 import com.example.ecommercefashion.databinding.ItemShoppingCartBinding
+import com.example.ecommercefashion.models.Coupon
 import com.example.ecommercefashion.models.ItemCart
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -32,6 +33,8 @@ class ShoppingCartActivity : AppCompatActivity() {
     companion object {
         val TAG = "ShoppingCart"
         var listShopItem: MutableList<ShopItem> = mutableListOf()
+        public final val REQUEST_CODE_COUPON = 1
+
     }
 
 
@@ -64,7 +67,8 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         binding.applyCouponShoppingCartTextView.setOnClickListener {
             val intent = Intent(this,CouponActivity::class.java)
-            startActivity(intent)
+
+            startActivityForResult(intent, REQUEST_CODE_COUPON)
         }
         binding.checkOutButtonShoppingCart.setOnClickListener {
             val intent = Intent(this, CheckOutActivity::class.java)
@@ -155,6 +159,23 @@ class ShoppingCartActivity : AppCompatActivity() {
 
         override fun initializeViewBinding(view: View): ItemShoppingCartBinding {
             return ItemShoppingCartBinding.bind(view)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(requestCode == REQUEST_CODE_COUPON)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                val coupon : Coupon? =  data?.getParcelableExtra<Coupon>("key")
+                Log.d(TAG, "onActivityResult: ${coupon}")
+                if (coupon != null) {
+                    price = price - (price*(coupon.percentage)/100)
+                }
+                binding.priceTextViewActivityShoppingCart.text = "$${price}"
+            }
         }
     }
 }
