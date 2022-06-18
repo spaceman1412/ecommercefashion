@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ecommercefashion">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EcommerceFashion">
+        <meta-data android:name="com.google.android.gms.games.APP_ID"
+            android:value="875787058687" />
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".CouponActivity"
             android:exported="false" />
@@ -21,6 +26,12 @@
         <activity
             android:name=".EditInfoActivity"
             android:exported="false" />
+
+
+        <activity
+            android:name=".AdminActivity"
+            android:exported="false" />
+
         <activity
             android:name=".ProfileActivity"
             android:exported="false" />
@@ -44,7 +55,7 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
