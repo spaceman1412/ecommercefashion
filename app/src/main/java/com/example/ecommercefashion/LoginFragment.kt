@@ -53,7 +53,8 @@ class LoginFragment : Fragment() {
         }
         // configure the Google SignIn
         val googleSignInOptions =
-            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail() // we only need email from google account
                 .build()
@@ -66,6 +67,7 @@ class LoginFragment : Fragment() {
         //Google sign in textview, click to begin Google SignIn
         binding.googleLoginBtn.setOnClickListener {
             Log.d(TAG, "onCreate: begin Google SignIn")
+            Toast.makeText(this.context, "begin Google SignIn", Toast.LENGTH_SHORT).show();
             val intent = googleSignInClient.signInIntent
             startActivityForResult(intent, RC_SIGN_IN)
         }
@@ -87,7 +89,10 @@ class LoginFragment : Fragment() {
                         if (!it.isSuccessful) return@addOnCompleteListener
                         val currentUser = FirebaseAuth.getInstance().currentUser?.uid
                         Log.d(TAG, "Login successfully ${currentUser.toString()}")
-                        val intent = Intent(activity, MainActivity::class.java)
+
+                        var intent = Intent(activity, MainActivity::class.java)
+
+
                         startActivity(intent)
                     }
                     .addOnFailureListener {
@@ -99,8 +104,8 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkAdmin(email: String, password: String): Boolean {
-        val adminEmail: String = "thiennguyenadmin@gmail.com"
-        val adminPassword: String = "123456"
+        val adminEmail: String = "nnt.itute@gmail.com"
+        val adminPassword: String = "ngocthien"
 
         return adminEmail == email && adminPassword == password
     }
@@ -121,13 +126,23 @@ class LoginFragment : Fragment() {
         if (requestCode == RC_SIGN_IN) {
             Log.d(TAG, "onActivityResult: Google SignIn intent result")
             val accountTask = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                //Google sign in successful, now auth with firebase
-                val account = accountTask.getResult(ApiException::class.java)
-                firebaseAuthWithGoogleAccount(account)
-            } catch (e: Exception) {
-                Log.d(TAG, "onActivityResult: ${e.message}")
-            }
+
+
+            //Google sign in successful, now auth with firebase
+            val account = accountTask.getResult(ApiException::class.java)
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            FirebaseAuth.getInstance().signInWithCredential(credential)
+                .addOnCompleteListener{task ->
+                    if(task.isSuccessful) {
+                        var intent = Intent(activity, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                    else {
+                        Toast.makeText(this.context, task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+
         }
     }
 
