@@ -7,6 +7,7 @@ import android.provider.Settings
 import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityMainBinding
 import com.example.ecommercefashion.databinding.ActivityShoppingCartBinding
 import com.example.ecommercefashion.databinding.ItemShoppingCartBinding
@@ -152,13 +153,13 @@ class ShoppingCartActivity : AppCompatActivity() {
         override fun bind(viewBinding: ItemShoppingCartBinding, position: Int) {
             viewBinding.titleNameTextViewItemShoppingCart.text = shopItem.name
             viewBinding.sizeItemShoppingCartTextView.text = "Size ${shopItem.size}"
-//            viewBinding.primaryImageViewItemShoppingCart.setImageResource(shopItem.primaryImage)
             viewBinding.deleteImageViewItemShoppingCart.setOnClickListener {
                 Log.e("ShoppingCart", "Delete Clicked")
                 val uid = FirebaseAuth.getInstance().uid
                 FirebaseDatabase.getInstance().getReference("/cart/$uid/${shopItem.id}")
                     .removeValue()
             }
+            Glide.with(viewBinding.root.context).load(shopItem.primaryImageUrl).into(viewBinding.primaryImageViewItemShoppingCart)
         }
 
         override fun getLayout(): Int {

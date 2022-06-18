@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.databinding.ActivityCheckOutBinding
 import com.example.ecommercefashion.databinding.ItemCheckOutListBinding
 import com.example.ecommercefashion.models.Coupon
@@ -71,7 +72,7 @@ class CheckOutActivity : AppCompatActivity() {
 
     }
 
-    var listOfListItemCart  = HashMap<String,ArrayList<ItemCart?>>()
+
 
 //    private fun fetchCheckOutList(){
 //        //The function fetch not done yet so can't have data
@@ -98,13 +99,10 @@ class CheckOutActivity : AppCompatActivity() {
                         adapter.add(CheckOutItemList(layoutInflater,itemCheckout))
                     }
                 }
-
             }
-
             override fun onCancelled(error: DatabaseError) {
                 Log.d("CheckOutActivity",error.message)
             }
-
         })
     }
 
@@ -125,8 +123,12 @@ class CheckOutActivity : AppCompatActivity() {
                     }
                 }
                 if(key != null) {
-                    val itemCheckout = ItemCheckout(key, coupon, price, product_list)
-                    refGetKey.setValue(itemCheckout)
+                    if(price != 0)
+                    {
+                        val itemCheckout = ItemCheckout(key, coupon, price, product_list)
+                        refGetKey.setValue(itemCheckout)
+                    }
+
                 }
 
             }
@@ -159,8 +161,8 @@ class CheckOutItemList(layoutInflater: LayoutInflater,itemCheckout: ItemCheckout
             val child : View = layoutInflater.inflate(R.layout.item_check_out,null)
             child.findViewById<TextView>(R.id.titleName_textView_itemCheckOut).text = it?.name
             child.findViewById<TextView>(R.id.price_textView_itemCheckOut).text = "$${it?.price}"
-//            child.findViewById<ImageView>(R.id.primaryImage_imageView_itemcheckOut).setImageResource(
-//                it!!.primaryImage)
+            val imageView = child.findViewById<ImageView>(R.id.primaryImage_imageView_itemcheckOut)
+            Glide.with(layoutInflater.context).load(it.primaryImageUrl).into(imageView)
             viewBinding.linearLayoutCheckOut.addView(child)
         }
         if(itemCheckOutItem.coupon != null) {

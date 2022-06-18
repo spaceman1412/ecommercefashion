@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.ecommercefashion.models.ItemCart
 import org.w3c.dom.Text
 
@@ -43,6 +44,7 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
             intent.putExtra(MainActivity.USER_KEY,item_detail_list[position])
             context.startActivity(intent)
         }
+        Glide.with(context).load(item_detail_list[position].primaryImageUrl).into(holder.image)
     }
 
     override fun getItemCount(): Int {

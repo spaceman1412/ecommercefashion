@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewpager2"
         android:layout_width="match_parent"
@@ -22,7 +21,6 @@
             android:id="@+id/dots_container"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-
             tools:background="@color/black" />
     </LinearLayout>
 
@@ -33,6 +31,7 @@
         android:background="@drawable/rounded_bottomsheet"
         app:layout_anchor="@+id/sheet"
         app:layout_anchorGravity="top|center"
+        app:behavior_peekHeight="100dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <ImageView
@@ -118,8 +117,6 @@
                 android:layout_height="wrap_content"
                 android:text="$60"
                 android:textSize="18sp" />
-
-
 
                 <TextView
                     android:id="@+id/price_textView_itemDetail"

@@ -41,17 +41,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val productList = mutableListOf<ItemCart>()
+//        val productList = mutableListOf<ItemCart>()
 
-//        val item_cart = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
-//
-//        productList.add(item_cart)
+//        val item_cart1 = ItemCart("1","Cotton Pant",52,"Male","https://www.fashionkart.com.np/public/uploads/all/dE8uXgN0WQtxhD1CVn6yxCUgLK2dJ09ZCXpictGT.jpg", listOf(R.drawable.pants,R.drawable.pants_list), listOf("Trousers"))
+//        val item_cart2 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+//        val item_cart3 = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+
+//        productList.add(item_cart1)
 //        productList.add(item_cart)
 //        productList.add(item_cart)
 
 //        val ref = FirebaseDatabase.getInstance().getReference("products").push()
-//        item_cart.id = ref.key
-//        ref.setValue(item_cart)
+//        item_cart1.id = ref.key
+//        ref.setValue(item_cart1)
 //            .addOnCompleteListener {
 //                Log.d(TAG,"Saved value to database ${ref.key}")
 //            }
@@ -70,7 +72,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.menuMainActivity.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(this,CheckOutActivity::class.java)
+            startActivity(intent)
         }
 
         val icon: ImageView = binding.searchIconMainActivity
@@ -147,6 +150,8 @@ class MainActivity : AppCompatActivity() {
         val ref = FirebaseDatabase.getInstance().getReference("/products")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                adapter_large.clear()
+                adapter_small.clear()
                 snapshot.children.forEach {
                     val item_cart : ItemCart? = it.getValue(ItemCart::class.java)
                     Log.d(TAG, "onDataChange: ${it.toString()}")
@@ -195,7 +200,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     if(count == titles.size) adapter_large.add(ItemLarge(it))
-
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -234,6 +238,8 @@ class ItemSmall(val item_detail: ItemCart) : BindableItem<ItemSmallMainActivityB
     override fun bind(viewBinding: ItemSmallMainActivityBinding, position: Int) {
         viewBinding.priceTextViewSmallItem.text = "$${item_detail.price}"
         viewBinding.titleNameTextViewSmallItem.text = item_detail.name
+        val imageView = viewBinding.primaryImageImageViewSmallItem
+        Glide.with(viewBinding.root.context).load(item_detail.primaryImageUrl).into(imageView)
 //        viewBinding.primaryImageImageViewSmallItem.setImageResource(item_detail.primaryImage)
     }
 

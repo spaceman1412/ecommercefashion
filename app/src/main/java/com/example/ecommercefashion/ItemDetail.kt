@@ -32,11 +32,9 @@ class ItemDetail : AppCompatActivity() {
 
         val images = shopItem?.bannerImage
 
-        pager2.adapter = SliderAdapter(images!!)
+        pager2.adapter = SliderAdapter(images!!,this)
         val circleIndicator : CircleIndicator3 = binding.dotsContainer
         circleIndicator.setViewPager(pager2)
-
-
 
         val add_to_cart : LinearLayout = binding.addToCartBtnItemDetail
         val uid = FirebaseAuth.getInstance().uid
@@ -72,7 +70,7 @@ class ItemDetail : AppCompatActivity() {
         val sheet : FrameLayout = binding.sheet
 
         BottomSheetBehavior.from(sheet).apply {
-            peekHeight = 200
+
             this.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
