@@ -19,6 +19,8 @@ class NotificationMgtActivity : AppCompatActivity() {
         binding = ActivityNotificationMgtBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        //get coupon list from current coupon avaiable
         binding.pickCouponNotificationMgtTextView.setOnClickListener {
             val intent = Intent(this,CouponActivity::class.java)
 
@@ -41,6 +43,7 @@ class NotificationMgtActivity : AppCompatActivity() {
 
     }
 
+    //add notification to database
     private fun setUpNotification(notification: Notification) {
         val ref = FirebaseDatabase.getInstance().getReference("notifications").push()
         notification.id = ref.key.toString()

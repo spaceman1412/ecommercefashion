@@ -41,6 +41,7 @@ class CouponActivity : AppCompatActivity() {
         val recyclerView = binding.couponCouponActivityRecyclerView
         val uid : String? = FirebaseAuth.getInstance().uid
         Log.d(TAG, "onCreate: ${uid}")
+        //Check if with admin to listen to admin and with normal user to listen to normal user
         if(uid == null) listenCouponAdmin()
         else listenCouponUser()
 
@@ -50,6 +51,7 @@ class CouponActivity : AppCompatActivity() {
     }
 
 
+    //Get all coupon list
     private fun listenCouponAdmin()
     {
 
@@ -72,6 +74,7 @@ class CouponActivity : AppCompatActivity() {
         })
     }
 
+    //Get coupon with this user
     private fun listenCouponUser()
     {
         val uid = FirebaseAuth.getInstance().uid

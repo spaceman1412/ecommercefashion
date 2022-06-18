@@ -144,6 +144,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+    //Get product list
     private fun fetchProductList()
     {
         Log.d(TAG, "fetchProductList: ")
@@ -168,7 +170,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
+    //Filter the list with tag
     private fun filterAdapterLarge() {
         val chips_group = binding.chipGroupMainActivity
         val ids = chips_group.checkedChipIds

@@ -115,12 +115,15 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
+
+    //check if user is admin or not
     private fun checkAdmin(email: String, password: String): Boolean {
         val adminEmail: String = "nnt.itute@gmail.com"
         val adminPassword: String = "ngocthien"
         return adminEmail == email && adminPassword == password
     }
 
+    //check user loginned or not
     private fun checkUser() {
         //check if user is logged in or not
         val firebaseUser = firebaseAuth.currentUser
@@ -131,6 +134,8 @@ class LoginFragment : Fragment() {
         }
     }
 
+
+    // Do google login
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         // result returned from lunching the Intent from GoogleSignInApi.getSignInIntent(...);

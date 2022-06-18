@@ -91,6 +91,8 @@ class CheckOutActivity : AppCompatActivity() {
 //        }
 //    }
 
+
+    //Get checkout item at database
     private fun fetchCheckOutDatabase(){
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/check-out/$uid")
@@ -110,6 +112,7 @@ class CheckOutActivity : AppCompatActivity() {
         })
     }
 
+    //Get cart item at database and save to checkout item
 
     private fun listenCartDatabase(){
         val uid = FirebaseAuth.getInstance().uid

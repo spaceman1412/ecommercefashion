@@ -45,6 +45,8 @@ class NotificationActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
     }
 
+
+    //listen to notification on database
     private fun listenNotification()
     {
         val ref = FirebaseDatabase.getInstance().getReference("notifications")

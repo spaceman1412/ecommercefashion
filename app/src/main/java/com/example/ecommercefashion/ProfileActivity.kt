@@ -44,6 +44,8 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        //Get the current information of user
         val uid = FirebaseAuth.getInstance().uid
         if (uid != null) {
             FirebaseDatabase.getInstance().getReference("users").child(uid).get()
@@ -66,6 +68,7 @@ class ProfileActivity : AppCompatActivity() {
 
     var selectedUri: Uri? = null
 
+    //Set avatar of user
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

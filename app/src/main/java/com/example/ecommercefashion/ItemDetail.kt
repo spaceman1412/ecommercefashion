@@ -38,6 +38,8 @@ class ItemDetail : AppCompatActivity() {
 
         val add_to_cart : LinearLayout = binding.addToCartBtnItemDetail
         val uid = FirebaseAuth.getInstance().uid
+
+        //Add item into cart database
         add_to_cart.setOnClickListener {
             Log.e("ItemDetail","Clicked add to cart")
             val ref = FirebaseDatabase.getInstance().getReference("cart/$uid").push()
@@ -69,6 +71,8 @@ class ItemDetail : AppCompatActivity() {
 
         val sheet : FrameLayout = binding.sheet
 
+
+        //set up bottomsheet
         BottomSheetBehavior.from(sheet).apply {
 
             this.state = BottomSheetBehavior.STATE_COLLAPSED

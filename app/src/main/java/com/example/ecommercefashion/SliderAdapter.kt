@@ -8,6 +8,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
+
+//set up image for viewpager
 class SliderAdapter(val images: List<Int>, val context : Context) : RecyclerView.Adapter<SliderAdapter.ViewHolder>() {
 
 

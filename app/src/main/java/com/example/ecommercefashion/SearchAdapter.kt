@@ -55,6 +55,8 @@ class SearchAdapter(val item_detail_list: MutableList<ItemCart>,
         return filter
     }
 
+
+    //do query filter
     private val filter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val filteredList: MutableList<ItemCart> = ArrayList()

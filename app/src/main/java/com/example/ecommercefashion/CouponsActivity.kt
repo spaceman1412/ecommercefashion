@@ -33,6 +33,8 @@ class CouponsActivity : AppCompatActivity() {
 
     }
 
+
+    //Save coupon to database
     private fun setUpCoupon(coupon: Coupon) {
         val ref = FirebaseDatabase.getInstance().getReference("coupons").push()
         coupon.id = ref.key.toString()

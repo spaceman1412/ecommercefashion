@@ -20,6 +20,8 @@ class ChangePasswordActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
+
+        //Check if user login
         val uid = FirebaseAuth.getInstance().uid
         if (uid != null) {
             FirebaseDatabase.getInstance().getReference("users").child(uid).get()
@@ -27,6 +29,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                     val user = it.getValue(User::class.java)
 
                     binding.saveChangePasswordActivityButton.setOnClickListener {
+                        //Check if password input valid
                         val userauth = Firebase.auth.currentUser
                         val credential = EmailAuthProvider
                             .getCredential(user!!.email, binding.currentPassChangePasswordActivityEditText.text.toString())
@@ -37,6 +40,7 @@ class ChangePasswordActivity : AppCompatActivity() {
                                 .addOnFailureListener{ Log.d("ChangePasswordActivity", "onCreate: ${it}")}
                         }
 
+                        //Do update password with new password input
                         val newPassword = binding.newPassChangePasswordActivityEditText.text.toString()
                         userauth!!.updatePassword(newPassword)
                             .addOnCompleteListener { task ->

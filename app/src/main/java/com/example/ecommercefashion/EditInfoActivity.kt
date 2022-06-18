@@ -23,6 +23,8 @@ class EditInfoActivity : AppCompatActivity() {
 
         val uid = FirebaseAuth.getInstance().uid
 
+
+        //Get current value to editbox
         if (uid != null) {
             FirebaseDatabase.getInstance().getReference("users").child(uid).get().addOnSuccessListener {
                 val user = it.getValue(User::class.java)
@@ -34,6 +36,8 @@ class EditInfoActivity : AppCompatActivity() {
             }
         }
 
+
+        //Update information with input
         binding.saveEditInfoButton.setOnClickListener {
             val name = binding.nameEditInfoEditText.text
             val phoneNumber = binding.phoneNumerEditInfoEditText.text

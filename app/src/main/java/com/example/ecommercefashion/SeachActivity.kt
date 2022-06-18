@@ -38,6 +38,7 @@ class SeachActivity : AppCompatActivity() {
 
     }
 
+    //filter the list with input
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_menu,menu)
         val item : MenuItem = menu!!.findItem(R.id.action_search)

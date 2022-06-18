@@ -53,7 +53,7 @@ class ShoppingCartActivity : AppCompatActivity() {
 //            listenCartList()
 //            addToAdapter()
 //        }
-
+        //get the cart list database
         GlobalScope.launch {
             listenCartList()
             delay(5000L)

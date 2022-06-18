@@ -54,6 +54,8 @@ class RegisterFragment : Fragment() {
 
         return binding.root
     }
+
+    //save user to database
     private fun performRegister(){
         val email = binding.emailEditTextRegister
         val passwd = binding.passwdEditTextRegister
