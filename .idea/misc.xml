@@ -14,6 +14,7 @@
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_admin.xml" value="0.1" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_check_out.xml" value="0.15625" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_check_out_large.xml" value="0.15625" />
+        <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_coupon.xml" value="0.33" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_edit_info.xml" value="0.2" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_item_detail.xml" value="0.2875905797101449" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/activity_main.xml" value="0.29528985507246375" />
@@ -26,6 +27,7 @@
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/fragment_register.xml" value="0.264" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_check_out.xml" value="0.2875905797101449" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_check_out_list.xml" value="0.2875905797101449" />
+        <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_coupon.xml" value="0.33" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_detail.xml" value="0.2875905797101449" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_large_mainactivity.xml" value="0.15052083333333333" />
         <entry key="..\:/Study/Android/backup/EcommerceFashion/app/src/main/res/layout/item_notification.xml" value="0.4" />

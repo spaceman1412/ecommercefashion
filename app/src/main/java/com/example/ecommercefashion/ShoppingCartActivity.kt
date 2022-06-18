@@ -62,7 +62,10 @@ class ShoppingCartActivity : AppCompatActivity() {
         val uid = FirebaseAuth.getInstance().uid
         Log.d(TAG, "The uid $uid")
 
-
+        binding.applyCouponShoppingCartTextView.setOnClickListener {
+            val intent = Intent(this,CouponActivity::class.java)
+            startActivity(intent)
+        }
         binding.checkOutButtonShoppingCart.setOnClickListener {
             val intent = Intent(this, CheckOutActivity::class.java)
             startActivity(intent)
@@ -114,7 +117,7 @@ class ShoppingCartActivity : AppCompatActivity() {
                     } else Log.e("ShoppingCart", "Item shop is null")
                 }
 
-
+                binding.priceTextViewActivityShoppingCart.text = "$${price}"
                 adapter.clear()
                 addToAdapter()
                 adapter.notifyDataSetChanged()
