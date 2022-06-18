@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         val productList = mutableListOf<ItemCart>()
 
-        val item_cart = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
-
-        productList.add(item_cart)
-        productList.add(item_cart)
-        productList.add(item_cart)
+//        val item_cart = ItemCart("1","Cotton Pant",52,"Male","", listOf(), listOf())
+//
+//        productList.add(item_cart)
+//        productList.add(item_cart)
+//        productList.add(item_cart)
 
 //        val ref = FirebaseDatabase.getInstance().getReference("products").push()
 //        item_cart.id = ref.key
